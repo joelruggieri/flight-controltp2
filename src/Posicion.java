@@ -1,4 +1,3 @@
-
 public class Posicion {
 	
 	private int x;
@@ -21,6 +20,12 @@ public class Posicion {
 	public int getPosicionY (){
 		
 		return this.y;
+	}
+  
+  public boolean equals (Posicion otraPosicion){
+		/* Devuelve si otraPosicion es igual */
+      
+		return (this.x == otraPosicion.getPosicionX()) && (this.y == otraPosicion.getPosicionY());
 	}
 	
 
