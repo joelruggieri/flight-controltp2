@@ -2,16 +2,16 @@
 public abstract class Avion {
 	private int velocidad;
 	private Posicion posicion;
-	private String direccion;
+	private Posicion direccion;
 	
 	public Avion(int velocidad){
 		
-		int valorDeSalidaX= 1;
-		int valorDeSalidaY= 1;
+		int valorDeSalidaX = 0;
+		int valorDeSalidaY = 0;
 		
 		this.velocidad = velocidad;
 		this.posicion = new Posicion(valorDeSalidaX, valorDeSalidaY);
-		this.direccion = "noreste";
+		this.direccion = new Posicion (1,1);
 		
 	}
 	
@@ -29,48 +29,20 @@ public abstract class Avion {
 		
 	}
 	
-	public String getDireccion(){
+	public Posicion getDireccion(){
 		
 		return this.direccion;
+	}
+	
+	public void setDireccion(Posicion posicion){
+		
+		this.direccion = posicion;
 	}
 	
 	public void setPosicion(Posicion unaPosicion){
 		this.posicion = unaPosicion;
 	}
 	
-	public void moverAlNoreste(){
-		
-		Posicion posicionActual = this.getPosicion();
-		
-		int nuevoX = this.getVelocidad()*(posicionActual.getPosicionX());
-		int nuevoY = this.getVelocidad()*(posicionActual.getPosicionY());
-		
-		Posicion nuevaPosicion = new Posicion (nuevoX,nuevoY);
-		
-		this.setPosicion(nuevaPosicion);
-		
-		}
-	
-	public void moverAlNorte(){
-	}
-	
-	public void moverAlSur(){
-	}
-	
-	public void moverAlEste(){
-	}
-	
-	public void moverAlOeste(){
-	}
-	
-	public void moverAlNoroeste(){
-	}
-	
-	public void moverAlSureste(){
-	}
-	
-	public void moverAlSuroeste(){
-	}
 	
 }
 
