@@ -12,6 +12,8 @@ public class Simple extends Avion {
 		
 		super (velocidadInicial);
 		
+		this.puntosDeTrayectoria = new ArrayList<Posicion>();
+		
 	}
 	
 	public ArrayList<Posicion> getPuntosDeTrayectoria(){

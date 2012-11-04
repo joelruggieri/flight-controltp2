@@ -12,7 +12,7 @@ public class AvionSimpleTest extends TestCase {
 		assertEquals (velocidad, avion.getVelocidad());
 	}
 	
-	public void testAvionVolarCuandoNoHayTrayectoriaMarcadaDeberiaActualizarSuPosicionDependiendoDeSuVlecodiadYDeLaDireccionQueTraia(){
+	public void testAvionVolarCuandoNoHayTrayectoriaMarcadaDeberiaActualizarSuPosicionDependiendoDeSuVelocidadYDeLaDireccionQueTraia(){
 		
 		int velocidad = 2;
 		Simple avion = new Simple(velocidad);
