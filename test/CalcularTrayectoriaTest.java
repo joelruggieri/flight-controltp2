@@ -6,6 +6,7 @@ public class CalcularTrayectoriaTest extends TestCase {
 	
 	public void testProximaPosicionDeberiaRetornarUnaPosicionParaContinuarConlaDireccionQueTraia(){
 		
+   //arange
 		int x1 = 2;
 		int y1 = 1;
 		int x2 = 4;
@@ -13,14 +14,19 @@ public class CalcularTrayectoriaTest extends TestCase {
 		
 		Posicion posicion1 = new Posicion (x1, y1);
 		Posicion posicion2 = new Posicion (x2, y2);
+		Posicion posicionDireccion = new Posicion (6,9);
+		
+		boolean direccionesIguales;
 		
 		
+		//act
 		CalcularTrayectoria trayectoria = new CalcularTrayectoria (posicion1, posicion2);
-		
 		Posicion proximaPosicion = trayectoria.calcularProximaPosicion ();
 		
-		assertEquals (proximaPosicion.getPosicionX(), 6);
-		assertEquals (proximaPosicion.getPosicionY(), 9);
+		direccionesIguales = proximaPosicion.equals(posicionDireccion);
+		
+		//assert
+		assertTrue (direccionesIguales);
 	
 		
 	}
