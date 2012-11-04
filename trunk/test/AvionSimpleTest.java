@@ -11,5 +11,18 @@ public class AvionSimpleTest extends TestCase {
 		
 		assertEquals (velocidad, avion.getVelocidad());
 	}
+	
+	public void testAvionVolarCuandoNoHayTrayectoriaMarcadaDeberiaActualizarSuPosicionDependiendoDeSuVlecodiadYDeLaDireccionQueTraia(){
+		
+		int velocidad = 2;
+		Simple avion = new Simple(velocidad);
+		
+		avion.volar();
+		
+		Posicion posicionActualAvion = avion.getPosicion();
+		
+		assertEquals(posicionActualAvion.getPosicionX() , 2);
+		assertEquals(posicionActualAvion.getPosicionY() , 2);
+	}
 
 }
