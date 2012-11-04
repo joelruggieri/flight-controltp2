@@ -24,32 +24,14 @@ public class Simple extends Avion {
 		ArrayList<Posicion> puntosASeguir = this.getPuntosDeTrayectoria();
 		
 		if((puntosASeguir.size()) == 0){
-			switch (this.getDireccion()){
-			case "norte":
-				this.moverAlNorte();
+			int xDireccion = (this.getDireccion()).getPosicionX();
+			int yDireccion = (this.getDireccion()).getPosicionY();
 			
-			case "sur":
-				this.moverAlSur();
-				
-			case "este":
-				this.moverAlEste();
+			int nuevaX = (this.getPosicion()).getPosicionX() + (xDireccion * (this.getVelocidad()));
+			int nuevaY = (this.getPosicion()).getPosicionY() + (yDireccion * (this.getVelocidad()));
 			
-			case "oeste":
-				this.moverAlOeste();
-			
-			case "noreste":
-				this.moverAlNoreste();
-			
-			case "sureste":
-				this.moverAlSureste();
-				
-			case "noroeste":
-				this.moverAlNoroeste();
-			
-			case "suroeste":
-				this.moverAlSuroeste();	
-				
-			}
+			Posicion nuevaPosicion = new Posicion (nuevaX, nuevaY);
+			this.setPosicion(nuevaPosicion);
 		}
 	}
 	
