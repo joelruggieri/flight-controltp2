@@ -13,7 +13,7 @@ public class PosicionTest extends TestCase {
 		assertEquals (coordenadaY, unaPosicion.getPosicionY());
 	}
    
-  public void testDeDosPosicionesIgualesEqualsDeberiaDarVerdadero () {		
+	public void testDeDosPosicionesIgualesEqualsDeberiaDarVerdadero () {		
 		
 		//arrange
 		int x = 1;
@@ -31,7 +31,7 @@ public class PosicionTest extends TestCase {
 		
 	}
    
-  public void testDeDosPosicionesDistintasEqualsDeberiaDarFalso () {		
+	public void testDeDosPosicionesDistintasEqualsDeberiaDarFalso () {		
 		
 		//arrange
 		int x = 1;
@@ -48,5 +48,37 @@ public class PosicionTest extends TestCase {
 		assertFalse (sonIguales);
 		
 	}
+  
+	public void testSumarDosPosicionesDeberiaDarLaSuma (){
+		
+		//arange
+		Posicion unaPosicion = new Posicion (1,2);
+		Posicion otraPosicion = new Posicion (4,7);
+		Posicion adicion = new Posicion (5,9);
+		Posicion suma;
+		
+		//act
+		suma = unaPosicion.sumar (otraPosicion);
+		
+		//assert
+		assertTrue (suma.equals(adicion));
+		
+	}
+	
+	public void testRestarDosPosicionesDeberiaDarLaResta (){
+		
+		//arange
+		Posicion unaPosicion = new Posicion (1,2);
+		Posicion otraPosicion = new Posicion (4,7);
+		Posicion sustraccion = new Posicion (-3,-5);
+		Posicion resta;
+		
+		//act
+		resta = unaPosicion.restar (otraPosicion);
+		
+		//assert
+		assertTrue (resta.equals(sustraccion));
 
+	}
+	
 }
