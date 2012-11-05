@@ -14,12 +14,12 @@ public class Posicion {
 		this.y = coordenadaY;
 	}
 	
-	public int getPosicionX (){
+	public int getPosicionX(){
 		/* Devuelve la coordenada x */
 		return this.x;
 	}
 
-	public int getPosicionY (){
+	public int getPosicionY(){
 		/* Devuelve la coordenada y */
 		return this.y;
 	}
@@ -63,4 +63,9 @@ public class Posicion {
 		return resta;
 	}
 
+	public void ActualizarCoordenadas(int valorX, int valorY){
+		
+		this.x= valorX;
+		this.y= valorY;
+	}
 }

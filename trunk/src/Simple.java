@@ -22,10 +22,14 @@ public class Simple extends Avion {
 	}
 	
 	
-	public void volar(){
+	
+	public void volar(int dimension){
+		boolean modificacionDelSentidoDeVuelo = false;
 		ArrayList<Posicion> puntosASeguir = this.getPuntosDeTrayectoria();
 		
-		if((puntosASeguir.size()) == 0){
+		this.validarExtremoSuperiorDerecho(dimension,modificacionDelSentidoDeVuelo);
+		
+		if((puntosASeguir.size() == 0) && (!modificacionDelSentidoDeVuelo)){
 			int xDireccion = (this.getDireccion()).getPosicionX();
 			int yDireccion = (this.getDireccion()).getPosicionY();
 			
