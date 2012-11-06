@@ -68,6 +68,22 @@ public class Posicion {
 		
 		return resta;
 	}
+	
+	public Posicion multiplicar (int unValor){
+		/* Multiplica la posicion con la posicion pasada por parametro */
+		/* pre: debe ingresar unValor entero */
+		/* post: Devuelve la posicion multiplicada */
+		
+		int x,y;
+		Posicion multiplicacion;
+		
+		x = this.x * unValor;
+		y = this.y * unValor;
+		
+		multiplicacion = new Posicion(x,y);
+		
+		return multiplicacion;
+	}
 
 	public void ActualizarCoordenadas(int valorX, int valorY){
 		
