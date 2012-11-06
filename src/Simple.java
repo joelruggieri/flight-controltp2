@@ -1,28 +1,24 @@
 import java.util.ArrayList;
 
 
-public class Simple extends Avion {
-	
-	private ArrayList<Posicion> puntosDeTrayectoria;
-	private CalcularTrayectoria trayectoria;
-	
-	
+public class Simple extends Avion {	
 	
 	public Simple(int velocidadInicial){
 		
 		super (velocidadInicial);
 		
-		this.puntosDeTrayectoria = new ArrayList<Posicion>();
+		//this.puntosDeTrayectoria = new ArrayList<Posicion>();
 		
 	}
-	
+
+/*
 	public ArrayList<Posicion> getPuntosDeTrayectoria(){
 		
 		return this.puntosDeTrayectoria;
 	}
 	
 	
-	
+
 	public void volar(int dimension){
 		boolean modificacionDelSentidoDeVuelo = false;
 		ArrayList<Posicion> puntosASeguir = this.getPuntosDeTrayectoria();
@@ -40,7 +36,7 @@ public class Simple extends Avion {
 			this.setPosicion(nuevaPosicion);
 		}
 	}
-	
+*/
 	
 
 }
