@@ -6,15 +6,24 @@ public abstract class ObjetoVolador {
 	protected boolean aterrizado; 
 	protected Posicion direccion;
 	protected Trayectoria trayectoria;
+	protected Plano plano;
+	protected String tipoDeObjetoVolador;
 	
+	public String getTipoDeObjetoVolador(){
+		/* Devuelve el tipo de objeto volador que es */
+		
+		return this.tipoDeObjetoVolador;
+		
+	}
 	
-	public ObjetoVolador(int velocidad){
+	public ObjetoVolador(int velocidad, int limite, Plano unPlano){
 		/* Constructor del Objeto volador */
 		
 		int valorDeSalidaX = 0;
 		int valorDeSalidaY = 0;
 		ArrayList<Posicion> trayectoriaVacia = new ArrayList<Posicion>();
 		
+		this.plano = unPlano;
 		this.posicionActual = new Posicion(valorDeSalidaX, valorDeSalidaY);
 		this.direccion = new Posicion (1,-1);
 		this.aterrizado = false;
@@ -35,7 +44,7 @@ public abstract class ObjetoVolador {
 		/* post: cambia el estado del objeto volador a aterrizado */
 		
 		this.aterrizado = true;
-		
+		this.plano.posicionOcupadaPor(posicionActual, "pista");
 	}
 
 	public void setPosicion(Posicion unaPosicion){
@@ -65,19 +74,7 @@ public abstract class ObjetoVolador {
 	
 	
 	public void moverse(){
-		/* Mueve el objeto volador siguiendo la trayectoria o en el sentido de la direccion si no hay trayectoria definida */
-		/* post: cambia el valor de la posicion actual, buscando el movimiento mas optimo posible */
-		
-		if (this.trayectoria.getPrimerPosicion() == null){
-			
-			this.posicionActual = this.posicionActual.sumar(this.direccion);
-			
-		}else{
-			
-			this.trayectoria.calcularProximaPosicion(posicionActual);
-			
-		}
-		
+		// tiene que ser abstracto
 	}
 	
 /*	
