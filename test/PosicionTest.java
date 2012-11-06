@@ -3,28 +3,39 @@ import junit.framework.TestCase;
 
 public class PosicionTest extends TestCase {
 	
-	public void testConstructorDeUnaPosicionDeberiaSetearSusCoordenadas(){
+	
+	Posicion unaPosicion = new Posicion (1,2);
+	Posicion otraPosicion = new Posicion (4,7);
+	
+	protected void setUp () throws Exception {
+		super.setUp();
 		
-		int coordenadaX = 3;
-		int coordenadaY = 29;
-		Posicion unaPosicion = new Posicion (coordenadaX, coordenadaY);
+		unaPosicion = new Posicion (1,2);
+		otraPosicion = new Posicion (4,7);
+	}
+	
+	public void testConstructorDeUnaPosicionDeberiaSetearSusCoordenadas(){		
 		
-		assertEquals ( coordenadaX, unaPosicion.getPosicionX());
-		assertEquals (coordenadaY, unaPosicion.getPosicionY());
+		//arrange
+		int coordenadaX = 1;
+		int coordenadaY = 2;
+		
+		//act
+		
+		//assert
+		assertTrue ( coordenadaX == unaPosicion.getPosicionX() && coordenadaY == unaPosicion.getPosicionY());
+	
 	}
    
 	public void testDeDosPosicionesIgualesEqualsDeberiaDarVerdadero () {		
 		
 		//arrange
-		int x = 1;
-		int y = 5;
 		boolean sonIguales;
 		
-		Posicion unaPosicion = new Posicion (x,y);
-		Posicion otraPosicion = new Posicion (x,y);
+		Posicion posicion = new Posicion (1,2);
 		
 		//act
-		sonIguales = unaPosicion.equals(otraPosicion);
+		sonIguales = unaPosicion.equals(posicion);
 		
 		//assert
 		assertTrue (sonIguales);
@@ -34,12 +45,7 @@ public class PosicionTest extends TestCase {
 	public void testDeDosPosicionesDistintasEqualsDeberiaDarFalso () {		
 		
 		//arrange
-		int x = 1;
-		int y = 5;
 		boolean sonIguales;
-		
-		Posicion unaPosicion = new Posicion (x,y);
-		Posicion otraPosicion = new Posicion (x,1);
 		
 		//act
 		sonIguales = unaPosicion.equals(otraPosicion);
@@ -52,8 +58,6 @@ public class PosicionTest extends TestCase {
 	public void testSumarDosPosicionesDeberiaDarLaSuma (){
 		
 		//arange
-		Posicion unaPosicion = new Posicion (1,2);
-		Posicion otraPosicion = new Posicion (4,7);
 		Posicion adicion = new Posicion (5,9);
 		Posicion suma;
 		
@@ -68,8 +72,6 @@ public class PosicionTest extends TestCase {
 	public void testRestarDosPosicionesDeberiaDarLaResta (){
 		
 		//arange
-		Posicion unaPosicion = new Posicion (1,2);
-		Posicion otraPosicion = new Posicion (4,7);
 		Posicion sustraccion = new Posicion (-3,-5);
 		Posicion resta;
 		
@@ -79,6 +81,20 @@ public class PosicionTest extends TestCase {
 		//assert
 		assertTrue (resta.equals(sustraccion));
 
+	}
+	
+	public void testMultiplicarUnNumeroPorUnVectorDeberiaRealizarElProductoEscalar (){
+		
+		//arrange
+		int escalar = 3;
+		Posicion productoFinal = new Posicion (3,6);
+		Posicion producto;
+		
+		//act
+		producto = unaPosicion.multiplicar(escalar);
+		
+		//assert
+		assertTrue (producto.equals(productoFinal));
 	}
 	
 }
