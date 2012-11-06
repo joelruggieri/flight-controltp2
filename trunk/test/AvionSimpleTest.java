@@ -3,50 +3,34 @@ import junit.framework.TestCase;
 
 public class AvionSimpleTest extends TestCase {
 	
-	public void testConstructorDeUnAvionSimpleConUnaVelocidadConstante(){
+	private AvionSimple avion;
+	private int velocidad;
+	private int limite;
+	
+	protected void setUp () throws Exception {
+		super.setUp();
 		
-		int velocidad = 1;
-		
-		Simple avion = new Simple(velocidad);
-		
-		assertEquals (velocidad, avion.getVelocidad());
+		velocidad = 2;
+		limite = 768;
+		avion = new AvionSimple(velocidad,limite);
 	}
 	
 	public void testAvionVolarCuandoNoHayTrayectoriaMarcadaDeberiaActualizarSuPosicionDependiendoDeSuVelocidadYDeLaDireccionQueTraia(){
 		
-		int dimension = 300;
-		int velocidad = 2;
-		Simple avion = new Simple(velocidad);
+		//arrange
 		
-		avion.volar(dimension);
+		Posicion direccion, posicionFinal;
+		Posicion inicial = avion.getPosicion();
+		
+		//act
+		avion.moverse();
+		direccion = avion.getDireccion();
 		
 		Posicion posicionActualAvion = avion.getPosicion();
+		posicionFinal = inicial.sumar(direccion.multiplicar(velocidad));
 		
-		assertEquals(posicionActualAvion.getPosicionX() , 2);
-		assertEquals(posicionActualAvion.getPosicionY() , 2);
-		
+		//assert
+		assertTrue (posicionActualAvion.equals(posicionFinal));		
 	}
-	
-	public void testVolarAunaPosicionMasAllaDelLimitePermitidoEnDireccionAlNoresteDeberiaHacerQueElAvionReboteEnDichaDireccion(){
 		
-		int dimensionLimite = 768;
-		
-		int velocidad = 768;
-		
-		Simple avion = new Simple (velocidad);
-		
-		avion.volar(dimensionLimite);
-		
-		assertTrue(((avion.getPosicion()).getPosicionX() == dimensionLimite) && (((avion.getPosicion()).getPosicionX() == dimensionLimite)));
-		assertTrue (avion.esDireccionNoreste());
-		
-		avion.volar(dimensionLimite);
-		assertTrue (avion.esDireccionSuroeste());
-		
-		//assertTrue((avion.getPosicion()).getPosicionX() == 0);
-		//assertTrue((avion.getPosicion()).getPosicionY() == 0);
-		
-		
-	}
-
 }
