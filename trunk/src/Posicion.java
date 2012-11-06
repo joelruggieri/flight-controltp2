@@ -4,6 +4,12 @@ public class Posicion {
 	private int x;
 	private int y;
 	
+	public Posicion(){
+		
+		this.x = 0;
+		this.y = 0;
+		
+	}
 	
 	public Posicion(int coordenadaX, int coordenadaY){
 		/* Constructor de la clase Posicion */

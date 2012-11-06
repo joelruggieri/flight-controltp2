@@ -1,37 +1,46 @@
+import java.util.ArrayList;
 
 public abstract class Avion {
-	private int velocidad;
-	private Posicion posicion;
+	private int velocidad; //buscar para hacerlo atributo de clase
+	private Posicion posicionActual;
+	private boolean aterrizado; 
 	private Posicion direccion;
+	private Trayectoria trayectoria;
+	
 	
 	public Avion(int velocidad){
 		
 		int valorDeSalidaX = 0;
 		int valorDeSalidaY = 0;
+		ArrayList<Posicion> trayectoriaVacia = new ArrayList<Posicion>();
 		
-		this.velocidad = velocidad;
-		this.posicion = new Posicion(valorDeSalidaX, valorDeSalidaY);
-		this.direccion = new Posicion (1,1);
+		this.posicionActual = new Posicion(valorDeSalidaX, valorDeSalidaY);
+		this.direccion = new Posicion (1,-1);
+		this.aterrizado = false;
+		this.trayectoria = new Trayectoria(trayectoriaVacia);
 		
 	}
 	
-	public int getVelocidad(){
+	public void crearTrayectoria(ArrayList<Posicion> unaTrayectoriaNueva){
 		
-		return this.velocidad;
+		this.trayectoria = new Trayectoria(unaTrayectoriaNueva);
+		
+	}
+	
+	public void aterrizar(){
+		
+		this.aterrizado = true;
+		
+	}
+
+	public void setPosicion(Posicion unaPosicion){
+		
+		this.posicionActual = unaPosicion;
 	}
 	
 	public Posicion getPosicion(){
 		
-		return this.posicion;
-	}
-	
-	public void volar(int dimension){
-		
-	}
-	
-	public Posicion getDireccion(){
-		
-		return this.direccion;
+		return this.posicionActual;
 	}
 	
 	public void setDireccion(Posicion posicion){
@@ -39,51 +48,19 @@ public abstract class Avion {
 		this.direccion = posicion;
 	}
 	
-	public void setPosicion(Posicion unaPosicion){
-		this.posicion = unaPosicion;
+	public Posicion getDireccion(){
+		
+		return this.direccion;
+		
+	}
+	
+	
+	public void moverse(){
+		
+		
 	}
 	
 
-	public boolean esDireccionNorte(){
-		
-		return ((this.getDireccion()).getPosicionX() == 0) && ((this.getDireccion()).getPosicionY() == 1);
-	}
-	
-	public boolean esDireccionSur(){
-		
-		return ((this.getDireccion()).getPosicionX() == 0) && ((this.getDireccion()).getPosicionY() == -1);
-	}
-	
-	public boolean esDireccionEste(){
-		
-		return ((this.getDireccion()).getPosicionX() == 1) && ((this.getDireccion()).getPosicionY() == 0);
-	}
-	
-	public boolean esDireccionOeste(){
-		
-		return ((this.getDireccion()).getPosicionX() == -1) && ((this.getDireccion()).getPosicionY() == 0);
-	}	
-		
-	public boolean esDireccionNoroeste(){
-		
-		return ((this.getDireccion()).getPosicionX() == -1) && ((this.getDireccion()).getPosicionY() == 1);
-	}
-	
-	public boolean esDireccionNoreste(){
-		
-		return ((this.getDireccion()).getPosicionX() == 1) && ((this.getDireccion()).getPosicionY() == 1);
-	}
-	
-	public boolean esDireccionSureste(){
-		
-		return ((this.getDireccion()).getPosicionX() == 1) && ((this.getDireccion()).getPosicionY() == -1);
-	}
-	
-	public boolean esDireccionSuroeste(){
-		
-		return ((this.getDireccion()).getPosicionX() == -1) && ((this.getDireccion()).getPosicionY() == -1);
-		
-	}
 	
 	
 	public void invertirDireccion(){
@@ -92,36 +69,5 @@ public abstract class Avion {
 		
 		this.direccion = new Posicion(nuevaDireccionEnX, nuevaDireccionEnY);
 	}
-	
-	public void validarExtremoSuperiorDerecho(int dimension, boolean cambioDeSentido){
-		
-		int valorX = (this.getPosicion()).getPosicionX();
-		int valorY = (this.getPosicion()).getPosicionY();
-		
-		int nuevoX = valorX - (this.getVelocidad());
-		int nuevoY = valorY - (this.getVelocidad());
-		
-		if((valorX == dimension) && (valorY == dimension)){
-			
-			if(this.esDireccionNorte()){
-				this.getPosicion().ActualizarCoordenadas(valorX, nuevoY);
-				this.invertirDireccion();
-				cambioDeSentido = true;
-			}else{
-				if(this.esDireccionEste()){
-					this.getPosicion().ActualizarCoordenadas(nuevoX, valorY);
-					this.invertirDireccion();
-					cambioDeSentido = true;
-				}else{
-					if(this.esDireccionNoreste()){
-						this.getPosicion().ActualizarCoordenadas(nuevoX, nuevoY);
-						this.invertirDireccion();
-						cambioDeSentido = true;
-					}	
-				}
-			}
-		
-		}
-	}
-	
 }
+	
