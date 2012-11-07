@@ -2,10 +2,12 @@
 public class Plano {
 
 	private String[][] plano;
+	private int dimension;
 	
 	public Plano( int limite ){
 		/* Constructor del plano del juego */
 		
+		this.dimension = limite;
 		plano = new String [limite][limite];
 		for( int i = 0 ; i < limite ; i++ ){
 			for( int j = 0 ; j < limite ; j++ ){
@@ -15,8 +17,11 @@ public class Plano {
 		
 	}
 	
-	public String getPosicion(Posicion unaPosicion){
+	public String getPosicion(Posicion unaPosicion) throws PosicionFueraDeLasDimensionesEstablecidasException{
 		/* Devuelve que hay en una Posicion pedida */
+		if((unaPosicion.getPosicionX() > (this.dimension-1)) || (unaPosicion.getPosicionY() > (this.dimension-1))){
+			throw new PosicionFueraDeLasDimensionesEstablecidasException();
+		}
 		
 		return plano[unaPosicion.getPosicionX()][unaPosicion.getPosicionY()];
 		
@@ -38,5 +43,10 @@ public class Plano {
 		plano[unaPosicion.getPosicionX()][unaPosicion.getPosicionY()] = unObjeto;
 		
 	}
+	
+	public int getDimension (){
+		
+		return this.dimension;
+		}
 	
 }

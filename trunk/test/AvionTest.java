@@ -7,13 +7,14 @@ public class AvionTest extends TestCase {
 	private AvionSimple unAvion;
 	private int velocidad,limite;
 	private ArrayList<Posicion> primeraTrayectoria, segundaTrayectoria;
+	private Plano plano;
 	
 	protected void setUp () throws Exception {
 		super.setUp();
 		
 		velocidad = 1;
 		limite = 768;
-		unAvion = new AvionSimple(velocidad,limite);
+		unAvion = new AvionSimple(velocidad,limite,plano);
 		
 		primeraTrayectoria = new ArrayList<Posicion>();
 		segundaTrayectoria = new ArrayList<Posicion>();
