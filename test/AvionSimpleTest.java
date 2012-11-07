@@ -6,13 +6,14 @@ public class AvionSimpleTest extends TestCase {
 	private AvionSimple avion;
 	private int velocidad;
 	private int limite;
+	private Plano plano;
 	
 	protected void setUp () throws Exception {
 		super.setUp();
 		
 		velocidad = 2;
 		limite = 768;
-		avion = new AvionSimple(velocidad,limite);
+		avion = new AvionSimple(velocidad,limite,plano);
 	}
 	
 	public void testAvionVolarCuandoNoHayTrayectoriaMarcadaDeberiaActualizarSuPosicionDependiendoDeSuVelocidadYDeLaDireccionQueTraia(){
