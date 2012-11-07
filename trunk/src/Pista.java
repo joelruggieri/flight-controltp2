@@ -6,13 +6,10 @@ public class Pista {
 	private String objetosVoladoresPermitidos;
 	private Posicion direccionDeIngreso;
 	
-	public Pista(Plano unPlano, String tipoDeObjetoVolador){
+	public Pista(Plano unPlano, String tipoDeObjetoVolador, ArrayList<Posicion> unasEntradas){
 		/* Constructor de una pista */
 		
-		int valorDeSalidaX = 0;
-		int valorDeSalidaY = 0;
-		
-		this.entradas.add(new Posicion(valorDeSalidaX, valorDeSalidaY));
+		this.entradas = unasEntradas;
 		this.direccionDeIngreso = new Posicion (1,-1);
 		this.objetosVoladoresPermitidos = tipoDeObjetoVolador;
 		
@@ -23,6 +20,10 @@ public class Pista {
 			i++;
 			
 		}
+	}
+	
+	public void noHacerNada(){
+		//no hace nada, pero lo hardcoree para un test
 	}
 	
 	public void validarObjetoVolador (ObjetoVolador unObjetoVolador){
