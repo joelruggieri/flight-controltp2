@@ -2,7 +2,7 @@ package fiuba.algo3.flightcontrol;
 
 public class Helicoptero extends ObjetoVolador{
 
-	public Helicoptero(int velocidadInicial,int limite,Plano unPlano){
+	public Helicoptero(int velocidadInicial,int limite,Escenario unPlano){
 		/* Constructor de un helicoptero */
 		
 		super (velocidadInicial, limite, unPlano);

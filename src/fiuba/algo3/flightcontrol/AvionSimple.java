@@ -2,7 +2,7 @@ package fiuba.algo3.flightcontrol;
 
 public class AvionSimple extends ObjetoVolador {	
 	
-	public AvionSimple(int velocidadInicial, int limite, Plano unPlano){
+	public AvionSimple(int velocidadInicial, int limite, Escenario unPlano){
 		/* Constructor de una avion simle */
 		super (velocidadInicial, limite, unPlano);
 		

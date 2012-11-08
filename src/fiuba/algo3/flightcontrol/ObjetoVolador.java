@@ -7,7 +7,7 @@ public abstract class ObjetoVolador {
 	protected boolean aterrizado; 
 	protected Posicion direccion;
 	protected Trayectoria trayectoria;
-	protected Plano plano;
+	protected Escenario plano;
 	protected String tipoDeObjetoVolador;
 	
 	public String getTipoDeObjetoVolador(){
@@ -17,7 +17,7 @@ public abstract class ObjetoVolador {
 		
 	}
 	
-	public ObjetoVolador(int velocidad, int limite, Plano unPlano){
+	public ObjetoVolador(int velocidad, int limite, Escenario unPlano){
 		/* Constructor del Objeto volador */
 		
 		int valorDeSalidaX = 0;

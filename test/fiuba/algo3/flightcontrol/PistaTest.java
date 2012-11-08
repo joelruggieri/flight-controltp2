@@ -15,7 +15,7 @@ public class PistaTest extends TestCase {
 			ArrayList<Posicion> posicionDeEntradaDeAviones = new ArrayList<Posicion>();
 			posicionDeEntradaDeAviones.add(unaEntrada);
 			
-			Plano unPlano = new Plano(unLimite);
+			Escenario unPlano = new Escenario(unLimite);
 			
 		//act
 			Pista unaPista = new Pista(unPlano,objetoVoladorQuePuedeRecibir,posicionDeEntradaDeAviones);

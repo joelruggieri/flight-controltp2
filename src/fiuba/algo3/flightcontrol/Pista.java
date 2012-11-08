@@ -7,7 +7,7 @@ public class Pista {
 	private String objetosVoladoresPermitidos;
 	private Posicion direccionDeIngreso;
 	
-	public Pista(Plano unPlano, String tipoDeObjetoVolador, ArrayList<Posicion> unasEntradas){
+	public Pista(Escenario unPlano, String tipoDeObjetoVolador, ArrayList<Posicion> unasEntradas){
 		/* Constructor de una pista */
 		
 		this.entradas = unasEntradas;
