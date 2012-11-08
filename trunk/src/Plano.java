@@ -36,11 +36,24 @@ public class Plano {
 		
 	}
 	
-	public void posicionOcupadaPor(Posicion unaPosicion,String unObjeto){
+	public void posicionOcupadaPor(Posicion unaPosicion,String unObjeto) throws HayDosAvionesEnUnaMismaPosicionException, DosPistasNoPuedenCompartirPosicionesException{
 		/* Establece que ahora la posicion esta ocupada por un objeto */
 		/* pre: la posicion debe estar vacia */
 		/* post: la posicion queda ocupada por un objeto */
-		plano[unaPosicion.getPosicionX()][unaPosicion.getPosicionY()] = unObjeto;
+		if((this.plano[unaPosicion.getPosicionX()][unaPosicion.getPosicionY()] == "pista") && (unObjeto =="pista"))
+			throw new DosPistasNoPuedenCompartirPosicionesException();
+		
+		if((this.plano[unaPosicion.getPosicionX()][unaPosicion.getPosicionY()] == "avion") && (unObjeto =="avion"))
+			throw new HayDosAvionesEnUnaMismaPosicionException();
+		
+		if((this.plano[unaPosicion.getPosicionX()][unaPosicion.getPosicionY()] == "vacio"))
+			plano[unaPosicion.getPosicionX()][unaPosicion.getPosicionY()] = unObjeto;
+		else
+			if((this.plano[unaPosicion.getPosicionX()][unaPosicion.getPosicionY()] == "avion") && (unObjeto=="pista"))
+				plano[unaPosicion.getPosicionX()][unaPosicion.getPosicionY()] ="avion y pista";
+			else 
+				if((this.plano[unaPosicion.getPosicionX()][unaPosicion.getPosicionY()] == "pista") && (unObjeto=="avion"))
+					plano[unaPosicion.getPosicionX()][unaPosicion.getPosicionY()] ="avion y pista";
 		
 	}
 	
