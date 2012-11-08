@@ -69,7 +69,7 @@ public class PlanoTest extends TestCase {
 		
 	}
 	
-	public void testPosicionQuedaOcupadaPorAvionDichaPosicionDeberiaQuedarActualzadaConAvion() throws PosicionFueraDeLasDimensionesEstablecidasException{
+	public void testPosicionQuedaOcupadaPorAvionDichaPosicionDeberiaQuedarActualzadaConAvion() throws PosicionFueraDeLasDimensionesEstablecidasException, HayDosAvionesEnUnaMismaPosicionException, DosPistasNoPuedenCompartirPosicionesException{
 		
 		int dimension = 30;
 		
@@ -84,8 +84,117 @@ public class PlanoTest extends TestCase {
 		
 		assertEquals(plano.getPosicion(unaPosicion),avion);
 	}
+	
+	public void testPosicionQuedaVaciaDeUnaPosicionOcupadaDeberiaQuedarEnEstadoVacia() throws PosicionFueraDeLasDimensionesEstablecidasException, HayDosAvionesEnUnaMismaPosicionException, DosPistasNoPuedenCompartirPosicionesException{
+		
+		int dimension = 30;
+		
+		Plano plano = new Plano(dimension);
+		
+		int coordenadaX = 4;
+		int coordenadaY = 6;
+		Posicion unaPosicion = new Posicion(coordenadaX, coordenadaY);
+		
+		String avion = "avion";
+		plano.posicionOcupadaPor(unaPosicion, avion);
+		
+		plano.posicionQuedaVacio(unaPosicion);
+		
+		assertEquals(plano.getPosicion(unaPosicion), "vacio");
 		
 	}
+	
+	public void testPosicionQuedaOcupadaPorUnaPistaCuandoYaHabiaUnAvionAlliDeberiaQuedarOcupadaPorAmbasCosas() throws PosicionFueraDeLasDimensionesEstablecidasException, HayDosAvionesEnUnaMismaPosicionException, DosPistasNoPuedenCompartirPosicionesException{
+		
+		int dimension = 30;
+		
+		Plano plano = new Plano(dimension);
+		
+		int coordenadaX = 4;
+		int coordenadaY = 6;
+		Posicion unaPosicion = new Posicion(coordenadaX, coordenadaY);
+		
+		String avion = "avion";
+		String pista = "pista";
+		plano.posicionOcupadaPor(unaPosicion, avion);
+		
+		plano.posicionOcupadaPor(unaPosicion, pista);
+		
+		assertEquals(plano.getPosicion(unaPosicion), "avion y pista");
+		
+	}
+	
+	
+	public void testPosicionQuedaOcupadaPorUnAvionCuandoYaHabiaUnaPistaAlliDeberiaQuedarOcupadaPorAmbasCosas() throws PosicionFueraDeLasDimensionesEstablecidasException, HayDosAvionesEnUnaMismaPosicionException, DosPistasNoPuedenCompartirPosicionesException{
+		
+		int dimension = 30;
+		
+		Plano plano = new Plano(dimension);
+		
+		int coordenadaX = 4;
+		int coordenadaY = 6;
+		Posicion unaPosicion = new Posicion(coordenadaX, coordenadaY);
+		
+		String pista = "pista";
+		String avion = "avion";
+		
+		plano.posicionOcupadaPor(unaPosicion, pista);
+		
+		plano.posicionOcupadaPor(unaPosicion, avion);
+		
+		assertEquals(plano.getPosicion(unaPosicion), "avion y pista");
+		
+	}
+	
+	public void testPosicionQuedaOcupadaPorUnAvionCuandoYaHabiaUnAvionAlliDeberiaLanzarUnaExcepcion() throws PosicionFueraDeLasDimensionesEstablecidasException, HayDosAvionesEnUnaMismaPosicionException, DosPistasNoPuedenCompartirPosicionesException{
+		
+		int dimension = 30;
+		
+		Plano plano = new Plano(dimension);
+		
+		int coordenadaX = 4;
+		int coordenadaY = 6;
+		Posicion unaPosicion = new Posicion(coordenadaX, coordenadaY);
+		
+		String avion = "avion";
+		String avion1 = "avion";
+		
+		plano.posicionOcupadaPor(unaPosicion, avion1);
+		
+		try{
+			plano.posicionOcupadaPor(unaPosicion, avion);
+		}catch (HayDosAvionesEnUnaMismaPosicionException excepcion){
+			
+		}
+		
+	}
+	
+	public void testPosicionQuedaOcupadaPorUnaPistaCuandoYaHabiaUnaPistaAlliDeberiaLanzarUnaExcepcion() throws PosicionFueraDeLasDimensionesEstablecidasException, HayDosAvionesEnUnaMismaPosicionException, DosPistasNoPuedenCompartirPosicionesException{
+		
+		int dimension = 30;
+		
+		Plano plano = new Plano(dimension);
+		
+		int coordenadaX = 4;
+		int coordenadaY = 6;
+		Posicion unaPosicion = new Posicion(coordenadaX, coordenadaY);
+		
+		String pista = "pista";
+		String otraPista = "pista";
+		
+		plano.posicionOcupadaPor(unaPosicion, pista);
+		
+		try{
+			plano.posicionOcupadaPor(unaPosicion, otraPista);
+		
+		}catch (DosPistasNoPuedenCompartirPosicionesException excepcion){
+			
+		}
+		
+	}
+		
+}
+	
 		
 		
 
