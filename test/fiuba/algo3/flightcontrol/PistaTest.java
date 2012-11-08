@@ -26,5 +26,30 @@ public class PistaTest extends TestCase {
 		
 	}
 	
+	public void testCrearUnaPistaDeDosEntradasDeberiaFigurarLasDosEntradasEnElEscenario() throws PosicionFueraDeLasDimensionesEstablecidasException{
+		
+		//arrange
+			int unLimite = 768;
+			String objetoVoladorQuePuedeRecibir = "avionSimple";
+		
+			Posicion unaEntrada = new Posicion(1,1);
+			Posicion otraEntrada = new Posicion(1,3);
+
+			ArrayList<Posicion> posicionDeEntradaDeAviones = new ArrayList<Posicion>();
+			posicionDeEntradaDeAviones.add(unaEntrada);
+			posicionDeEntradaDeAviones.add(otraEntrada);
+		
+			Escenario unEscenario = new Escenario(unLimite);
+			
+		//act
+			Pista unaPista = new Pista(unEscenario,objetoVoladorQuePuedeRecibir,posicionDeEntradaDeAviones);
+			
+			boolean existenLasDosPistas = false;
+			existenLasDosPistas = ( (unEscenario.getPosicion(unaEntrada) == "pista") && (unEscenario.getPosicion(otraEntrada) == "pista"));
+			
+		//assert
+			assertTrue( existenLasDosPistas );
+			
+	}
 	
 }
