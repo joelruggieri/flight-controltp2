@@ -1,7 +1,4 @@
 package fiuba.algo3.flightcontrol;
-import fiuba.algo3.flightcontrol.Plano;
-import fiuba.algo3.flightcontrol.Posicion;
-import fiuba.algo3.flightcontrol.PosicionFueraDeLasDimensionesEstablecidasException;
 import junit.framework.TestCase;
 
 
