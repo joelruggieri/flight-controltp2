@@ -26,6 +26,9 @@ public abstract class ObjetoVolador {
 		
 		this.plano = unPlano;
 		this.posicionActual = new Posicion(valorDeSalidaX, valorDeSalidaY);
+		
+		this.plano.posicionOcupadaPor(posicionActual, "objetoVolador");
+		
 		this.direccion = new Posicion (1,-1);
 		this.aterrizado = false;
 		this.trayectoria = new Trayectoria(trayectoriaVacia);
@@ -75,7 +78,21 @@ public abstract class ObjetoVolador {
 	
 	
 	public void moverse(){
-		// tiene que ser abstracto
+		/* Mueve al avion siguiendo su trayectoria */
+		
+		for (int i=0; i < this.velocidad; i++){
+			
+			Posicion siguientePosicion = this.trayectoria.getProximaPosicion(this.posicionActual);
+			
+			//En caso de que no haya trayectoria, validar bordes.
+			//En cualquier caso, validar choque, entrada a pista.
+			
+			this.posicionActual = siguientePosicion;
+			
+		}
+		
+		
+		
 	}
 	
 /*	
