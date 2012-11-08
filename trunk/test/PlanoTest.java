@@ -69,7 +69,7 @@ public class PlanoTest extends TestCase {
 		
 	}
 	
-	public void testPosicionQuedaOcupadaPorAvionDichaPosicionDeberiaQuedarActualzadaConAvion() throws PosicionFueraDeLasDimensionesEstablecidasException, HayDosAvionesEnUnaMismaPosicionException, DosPistasNoPuedenCompartirPosicionesException{
+	public void testPosicionQuedaOcupadaPorAvionDichaPosicionDeberiaQuedarActualzadaConAvion() throws PosicionFueraDeLasDimensionesEstablecidasException{
 		
 		int dimension = 30;
 		
@@ -80,12 +80,13 @@ public class PlanoTest extends TestCase {
 		Posicion unaPosicion = new Posicion(coordenadaX, coordenadaY);
 		
 		String avion = "avion";
+		
 		plano.posicionOcupadaPor(unaPosicion, avion);
 		
 		assertEquals(plano.getPosicion(unaPosicion),avion);
 	}
 	
-	public void testPosicionQuedaVaciaDeUnaPosicionOcupadaDeberiaQuedarEnEstadoVacia() throws PosicionFueraDeLasDimensionesEstablecidasException, HayDosAvionesEnUnaMismaPosicionException, DosPistasNoPuedenCompartirPosicionesException{
+	public void testPosicionQuedaVaciaDeUnaPosicionOcupadaDeberiaQuedarEnEstadoVacia() throws PosicionFueraDeLasDimensionesEstablecidasException{
 		
 		int dimension = 30;
 		
@@ -104,7 +105,7 @@ public class PlanoTest extends TestCase {
 		
 	}
 	
-	public void testPosicionQuedaOcupadaPorUnaPistaCuandoYaHabiaUnAvionAlliDeberiaQuedarOcupadaPorAmbasCosas() throws PosicionFueraDeLasDimensionesEstablecidasException, HayDosAvionesEnUnaMismaPosicionException, DosPistasNoPuedenCompartirPosicionesException{
+	public void testPosicionQuedaOcupadaPorUnaPistaCuandoYaHabiaUnAvionAlliDeberiaQuedarOcupadaPorAmbasCosas() throws PosicionFueraDeLasDimensionesEstablecidasException{
 		
 		int dimension = 30;
 		
@@ -125,7 +126,7 @@ public class PlanoTest extends TestCase {
 	}
 	
 	
-	public void testPosicionQuedaOcupadaPorUnAvionCuandoYaHabiaUnaPistaAlliDeberiaQuedarOcupadaPorAmbasCosas() throws PosicionFueraDeLasDimensionesEstablecidasException, HayDosAvionesEnUnaMismaPosicionException, DosPistasNoPuedenCompartirPosicionesException{
+	public void testPosicionQuedaOcupadaPorUnAvionCuandoYaHabiaUnaPistaAlliDeberiaQuedarOcupadaPorAmbasCosas() throws PosicionFueraDeLasDimensionesEstablecidasException{
 		
 		int dimension = 30;
 		
@@ -146,52 +147,6 @@ public class PlanoTest extends TestCase {
 		
 	}
 	
-	public void testPosicionQuedaOcupadaPorUnAvionCuandoYaHabiaUnAvionAlliDeberiaLanzarUnaExcepcion() throws PosicionFueraDeLasDimensionesEstablecidasException, HayDosAvionesEnUnaMismaPosicionException, DosPistasNoPuedenCompartirPosicionesException{
-		
-		int dimension = 30;
-		
-		Plano plano = new Plano(dimension);
-		
-		int coordenadaX = 4;
-		int coordenadaY = 6;
-		Posicion unaPosicion = new Posicion(coordenadaX, coordenadaY);
-		
-		String avion = "avion";
-		String avion1 = "avion";
-		
-		plano.posicionOcupadaPor(unaPosicion, avion1);
-		
-		try{
-			plano.posicionOcupadaPor(unaPosicion, avion);
-		}catch (HayDosAvionesEnUnaMismaPosicionException excepcion){
-			
-		}
-		
-	}
-	
-	public void testPosicionQuedaOcupadaPorUnaPistaCuandoYaHabiaUnaPistaAlliDeberiaLanzarUnaExcepcion() throws PosicionFueraDeLasDimensionesEstablecidasException, HayDosAvionesEnUnaMismaPosicionException, DosPistasNoPuedenCompartirPosicionesException{
-		
-		int dimension = 30;
-		
-		Plano plano = new Plano(dimension);
-		
-		int coordenadaX = 4;
-		int coordenadaY = 6;
-		Posicion unaPosicion = new Posicion(coordenadaX, coordenadaY);
-		
-		String pista = "pista";
-		String otraPista = "pista";
-		
-		plano.posicionOcupadaPor(unaPosicion, pista);
-		
-		try{
-			plano.posicionOcupadaPor(unaPosicion, otraPista);
-		
-		}catch (DosPistasNoPuedenCompartirPosicionesException excepcion){
-			
-		}
-		
-	}
 		
 }
 	
