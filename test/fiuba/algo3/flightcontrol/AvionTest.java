@@ -1,10 +1,6 @@
 package fiuba.algo3.flightcontrol;
 import java.util.ArrayList;
 
-import fiuba.algo3.flightcontrol.AvionSimple;
-import fiuba.algo3.flightcontrol.Plano;
-import fiuba.algo3.flightcontrol.Posicion;
-
 import junit.framework.TestCase;
 
 public class AvionTest extends TestCase {

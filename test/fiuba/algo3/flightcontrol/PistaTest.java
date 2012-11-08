@@ -1,10 +1,11 @@
+package fiuba.algo3.flightcontrol;
 import junit.framework.TestCase;
 import java.util.ArrayList;
 
 public class PistaTest extends TestCase {
 
 	
-	public void testPistaColocadaDentroDeLasDimensionesDeberiaCrearseCorrectamente(){
+	public void testPistaColocadaDentroDeLasDimensionesDeberiaCrearseCorrectamente() throws PosicionFueraDeLasDimensionesEstablecidasException{
 		
 		//arrange
 			int unLimite = 10;

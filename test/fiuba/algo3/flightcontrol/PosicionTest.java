@@ -1,5 +1,4 @@
 package fiuba.algo3.flightcontrol;
-import fiuba.algo3.flightcontrol.Posicion;
 import junit.framework.TestCase;
 
 
