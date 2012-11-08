@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import junit.framework.TestCase;
 
-public class AvionTest extends TestCase {
+public class ObjetoVoladorTest extends TestCase {
 	
 	private AvionSimple unAvion;
 	private int velocidad,limite;

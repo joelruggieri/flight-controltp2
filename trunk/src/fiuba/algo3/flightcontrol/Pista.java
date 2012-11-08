@@ -15,7 +15,7 @@ public class Pista {
 		this.objetosVoladoresPermitidos = tipoDeObjetoVolador;
 		
 		int i = 0;
-		while( entradas.get(i) != null ){
+		while( entradas.size() > i ){
 			
 			unPlano.posicionOcupadaPor(entradas.get(i), "pista");
 			i++;
@@ -23,9 +23,6 @@ public class Pista {
 		}
 	}
 	
-	public void noHacerNada(){
-		//no hace nada, pero lo hardcoree para un test
-	}
 	
 	public void validarObjetoVolador (ObjetoVolador unObjetoVolador){
 		/* Si la direccion y posicion del objeto volador coinciden con las de la pista y el objeto volador puede aterrizar 
