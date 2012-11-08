@@ -1,11 +1,11 @@
 package fiuba.algo3.flightcontrol;
 
-public class Plano {
+public class Escenario {
 
 	private String[][] plano;
 	private int dimension;
 	
-	public Plano( int limite ){
+	public Escenario( int limite ){
 		/* Constructor del plano del juego */
 		
 		this.dimension = limite;

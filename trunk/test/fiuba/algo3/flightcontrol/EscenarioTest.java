@@ -2,14 +2,14 @@ package fiuba.algo3.flightcontrol;
 import junit.framework.TestCase;
 
 
-public class PlanoTest extends TestCase {
+public class EscenarioTest extends TestCase {
 	
 	public void testConstructorDelPlanoConUnaDimensionEstablecidaDeberiaCrearUnPlanoDeDichaDimension(){
 		
 		int dimension = 768;
-		Plano pantalla = new Plano(dimension);
+		Escenario unEscenario = new Escenario(dimension);
 		
-		assertTrue(pantalla.getDimension() == dimension);
+		assertTrue(unEscenario.getDimension() == dimension);
 	}
 	
 	
@@ -17,28 +17,27 @@ public class PlanoTest extends TestCase {
 		
 		int dimension= 5;
 		
-		Plano pantalla = new Plano(dimension);
+		Escenario unEscenario = new Escenario(dimension);
 		
 		int x = 0;
 		int y = 0;
 		Posicion posicion1 = new Posicion (x,y);
-		String valor1 = pantalla.getPosicion(posicion1);
+		String valor1 = unEscenario.getPosicion(posicion1);
 
-		
 		 x = 1;
 		 y = 0;
 		Posicion posicion2 = new Posicion (x,y);
-		String valor2 = pantalla.getPosicion(posicion2);
+		String valor2 = unEscenario.getPosicion(posicion2);
 		
 		x = 0;
 		y = 1;
 		Posicion posicion3 = new Posicion (x,y);
-		String valor3 = pantalla.getPosicion(posicion3);
+		String valor3 = unEscenario.getPosicion(posicion3);
 		
 		x = 1;
 		y = 1;
 		Posicion posicion4 = new Posicion (x,y);
-		String valor4 = pantalla.getPosicion(posicion4);
+		String valor4 = unEscenario.getPosicion(posicion4);
 		
 		
 		assertEquals(valor1 , "vacio");
@@ -55,14 +54,14 @@ public class PlanoTest extends TestCase {
 		
 		int dimension = 25;
 		
-		Plano pantalla = new Plano(dimension);
+		Escenario unEscenario = new Escenario(dimension);
 		
 		int x = 30;
 		int y = 4;
 		Posicion unaPosicion = new Posicion(x,y);
 		
 		try{
-			pantalla.getPosicion(unaPosicion);
+			unEscenario.getPosicion(unaPosicion);
 		
 		}catch(PosicionFueraDeLasDimensionesEstablecidasException excepcion){
 			
@@ -74,7 +73,7 @@ public class PlanoTest extends TestCase {
 		
 		int dimension = 30;
 		
-		Plano plano = new Plano(dimension);
+		Escenario unEscenario = new Escenario(dimension);
 		
 		int coordenadaX = 4;
 		int coordenadaY = 6;
@@ -82,27 +81,44 @@ public class PlanoTest extends TestCase {
 		
 		String avion = "avion";
 		
-		plano.posicionOcupadaPor(unaPosicion, avion);
+		unEscenario.posicionOcupadaPor(unaPosicion, avion);
 		
-		assertEquals(plano.getPosicion(unaPosicion),avion);
+		assertEquals(unEscenario.getPosicion(unaPosicion),avion);
+	}
+	
+	public void testPosicionQuedaOcupadaPorUnaPistaDichaPosicionDeberiaQuedarActualzadaConUnaPista() throws PosicionFueraDeLasDimensionesEstablecidasException{
+		
+		int dimension = 30;
+		
+		Escenario unEscenario = new Escenario(dimension);
+		
+		int coordenadaX = 4;
+		int coordenadaY = 6;
+		Posicion unaPosicion = new Posicion(coordenadaX, coordenadaY);
+		
+		String unaPista = "pista";
+		
+		unEscenario.posicionOcupadaPor(unaPosicion, unaPista);
+		
+		assertEquals(unEscenario.getPosicion(unaPosicion),unaPista);
 	}
 	
 	public void testPosicionQuedaVaciaDeUnaPosicionOcupadaDeberiaQuedarEnEstadoVacia() throws PosicionFueraDeLasDimensionesEstablecidasException{
 		
 		int dimension = 30;
 		
-		Plano plano = new Plano(dimension);
+		Escenario unEscenario = new Escenario(dimension);
 		
 		int coordenadaX = 4;
 		int coordenadaY = 6;
 		Posicion unaPosicion = new Posicion(coordenadaX, coordenadaY);
 		
 		String avion = "avion";
-		plano.posicionOcupadaPor(unaPosicion, avion);
+		unEscenario.posicionOcupadaPor(unaPosicion, avion);
 		
-		plano.posicionQuedaVacio(unaPosicion);
+		unEscenario.posicionQuedaVacio(unaPosicion);
 		
-		assertEquals(plano.getPosicion(unaPosicion), "vacio");
+		assertEquals(unEscenario.getPosicion(unaPosicion), "vacio");
 		
 	}
 	
@@ -110,7 +126,7 @@ public class PlanoTest extends TestCase {
 		
 		int dimension = 30;
 		
-		Plano plano = new Plano(dimension);
+		Escenario unEscenario = new Escenario(dimension);
 		
 		int coordenadaX = 4;
 		int coordenadaY = 6;
@@ -118,11 +134,11 @@ public class PlanoTest extends TestCase {
 		
 		String avion = "avion";
 		String pista = "pista";
-		plano.posicionOcupadaPor(unaPosicion, avion);
+		unEscenario.posicionOcupadaPor(unaPosicion, avion);
 		
-		plano.posicionOcupadaPor(unaPosicion, pista);
+		unEscenario.posicionOcupadaPor(unaPosicion, pista);
 		
-		assertEquals(plano.getPosicion(unaPosicion), "avion y pista");
+		assertEquals(unEscenario.getPosicion(unaPosicion), "avion y pista");
 		
 	}
 	
@@ -131,7 +147,7 @@ public class PlanoTest extends TestCase {
 		
 		int dimension = 30;
 		
-		Plano plano = new Plano(dimension);
+		Escenario unEscenario = new Escenario(dimension);
 		
 		int coordenadaX = 4;
 		int coordenadaY = 6;
@@ -140,11 +156,11 @@ public class PlanoTest extends TestCase {
 		String pista = "pista";
 		String avion = "avion";
 		
-		plano.posicionOcupadaPor(unaPosicion, pista);
+		unEscenario.posicionOcupadaPor(unaPosicion, pista);
 		
-		plano.posicionOcupadaPor(unaPosicion, avion);
+		unEscenario.posicionOcupadaPor(unaPosicion, avion);
 		
-		assertEquals(plano.getPosicion(unaPosicion), "avion y pista");
+		assertEquals(unEscenario.getPosicion(unaPosicion), "avion y pista");
 		
 	}
 	
