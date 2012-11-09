@@ -58,9 +58,9 @@ public class Trayectoria {
 		direccionX = x / Math.abs(x);
 		direccionY = y / Math.abs(y);
 		
-		if (x > y){
+		if (x < y){
 			direccionX = 0;
-		}else if (x < y){
+		}else if (x > y){
 			direccionY = 0;
 		}
 		
