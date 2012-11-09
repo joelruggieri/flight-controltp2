@@ -26,7 +26,7 @@ public class Trayectoria {
 		
 		if (destino != null){
 			
-			direccion = this.getDireccion(posicionActual);
+			direccion = this.getVectorDirector(posicionActual);
 			proximaPosicion = direccion.sumar(posicionActual);
 			
 			if (proximaPosicion.equals(destino)){
@@ -68,7 +68,7 @@ public class Trayectoria {
 		
 	}
 	
-	public Posicion getDireccion (Posicion actual){
+	public Posicion getVectorDirector (Posicion actual){
 		/* Devuelve la direccion de la trayectoria. Si no hay trayectoria devuelve null */
 		/* pre: Se ingresa una Posicion */
 		/* post: Devuelve una posicion, que indica la direccion de la trayectoria */
