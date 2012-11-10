@@ -22,7 +22,7 @@ public class AvionSimple extends ObjetoVolador {
 			
 		}else{
 			
-			this.trayectoria.calcularProximaPosicion(posicionActual);
+			this.trayectoria.getProximaPosicion(posicionActual);
 			
 		}
 		
