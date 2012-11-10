@@ -33,6 +33,9 @@ import java.util.ArrayList;
 	}
 	
 	public void llegadaDeAvionSimple(AvionSimple simple){
+		if(simple.getPosicion().equals(this.posicionDeEntrada()) && simple.getDireccion().equals(this.direccionDeEntrada())){
+			simple.aterrizar();
+		}
 		
 	}
 	
@@ -41,6 +44,9 @@ import java.util.ArrayList;
 	}
 	
 	public void llegadaDeAvionComputarizado(AvionComputarizado computarizado){
+		if(computarizado.getPosicion().equals(this.posicionDeEntrada()) && computarizado.getDireccion().equals(this.direccionDeEntrada())){
+			computarizado.aterrizar();
+		}
 		
 	}
 	
