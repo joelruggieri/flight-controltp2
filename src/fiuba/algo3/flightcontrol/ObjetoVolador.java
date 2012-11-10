@@ -29,7 +29,7 @@ public abstract class ObjetoVolador {
 		
 		this.plano.posicionOcupadaPor(posicionActual, "objetoVolador");
 		
-		this.direccion = new Posicion (1,-1);
+		this.direccion = new Posicion (1,1);
 		this.aterrizado = false;
 		this.trayectoria = new Trayectoria(trayectoriaVacia);
 		
@@ -65,6 +65,9 @@ public abstract class ObjetoVolador {
 		
 	}
 	
+	public boolean aterrizo(){
+		return this.aterrizado;
+	}
 	
 	public void moverse(){
 		/* Mueve al avion siguiendo su trayectoria */

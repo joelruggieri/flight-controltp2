@@ -1,4 +1,5 @@
 package fiuba.algo3.flightcontrol;
+import java.lang.Math;
 
 public class Posicion {
 	
@@ -90,5 +91,21 @@ public class Posicion {
 		
 		this.x= valorX;
 		this.y= valorY;
+	}
+	
+	public void InvertirDireccion(){
+		
+		this.x = this.getPosicionX() * (-1);
+		this.y = this.getPosicionY() * (-1);
+	}
+	
+	public void canonizarPosicion(){
+		
+		if(this.getPosicionX() != 0){
+			this.x = this.getPosicionX() / (Math.abs(getPosicionX()));
+		}
+		if (this.getPosicionY() != 0){
+			this.y = this.getPosicionY() / (Math.abs(getPosicionY()));
+		}
 	}
 }
