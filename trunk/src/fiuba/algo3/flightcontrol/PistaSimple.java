@@ -40,7 +40,9 @@ import java.util.ArrayList;
 	}
 	
 	public void llegadaDeAvionHelicoptero(Helicoptero helicoptero){
-		
+		if(helicoptero.getPosicion().equals(this.posicionDeEntrada()) && helicoptero.getDireccion().equals(this.direccionDeEntrada())){
+			helicoptero.aterrizar();
+		}
 	}
 	
 	public void llegadaDeAvionComputarizado(AvionComputarizado computarizado){
