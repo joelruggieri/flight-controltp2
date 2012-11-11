@@ -100,7 +100,7 @@ public void testConstructorDeUnaPistaSimpleLaDireccionDeIngresoDeberiaQuedarDete
 	}
 	
 	
-	public void testLlegadaDeUnAvionSimpleALaPistaSimpleEnUnaPosicionQueEsLaDeEntradaDeberiaAterrizar(){
+	public void testLlegadaDeUnAvionSimpleALaPistaSimpleEnUnaPosicionQueEsLaDeEntradaYConDireccionApropiadaDeberiaAterrizar(){
 		
 		int velocidadDelAvion = 1;
 		int dimension = 7;
@@ -191,7 +191,7 @@ public void testLlegadaDeUnAvionSimpleALaPistaSimpleEnUnaPosicionQueNoEsLaDeEntr
 }
 
 
-	public void testLlegadaDeUnAvionHelicopteroALaPistaSimpleEnUnaPosicionQueEsLaDeEntradaNoDeberiaAterrizar(){
+	public void testLlegadaDeUnAvionHelicopteroALaPistaSimpleEnUnaPosicionQueEsLaDeEntradaYConDireccionApropiadaDeberiaAterrizar(){
 	
 		int velocidadDelAvion = 1;
 		int dimension = 7;
@@ -218,7 +218,7 @@ public void testLlegadaDeUnAvionSimpleALaPistaSimpleEnUnaPosicionQueNoEsLaDeEntr
 	
 		pista.llegadaDeAvionHelicoptero(helicoptero);
 	
-		assertTrue(!helicoptero.aterrizo());
+		assertTrue(helicoptero.aterrizo());
 	}
 	
 public void testLlegadaDeUnAvionHelicopteroALaPistaSimpleEnUnaDireccionQueNoEsLaDeEntradaNoDeberiaAterrizar(){
@@ -280,5 +280,97 @@ public void testLlegadaDeUnAvionHelicopteroALaPistaSimpleEnUnaPosicionQueNoEsLaD
 	
 	assertTrue(!helicoptero.aterrizo());
 }
+		
+
+public void testLlegadaDeUnAvionPesadoALaPistaSimpleEnUnaPosicionQueEsLaDeEntradaNoDeberiaAterrizar(){
+	
+	int velocidadDelAvion = 1;
+	int dimension = 7;
+	Escenario unPlano = new Escenario(dimension);
+	ArrayList<Posicion> posicionesDeLaPista = new ArrayList<Posicion>();
+	AvionPesado avion = new AvionPesado(velocidadDelAvion,dimension,unPlano);
+
+	avion.moverse();
+
+	/*creo las posiciones de la pista*/
+	Posicion posicionDeEntrada = new Posicion(1,1);
+	Posicion otraPosicionDeLaPista = new Posicion(2,2);
+	Posicion otraPosicionDeLaPista1 = new Posicion(3,3);
+	Posicion otraPosicionDeLaPista2 = new Posicion(4,4);
+	Posicion ultimaPosicionDeLaPista = new Posicion(5,5);
+
+	posicionesDeLaPista.add(posicionDeEntrada);
+	posicionesDeLaPista.add(otraPosicionDeLaPista);
+	posicionesDeLaPista.add(otraPosicionDeLaPista1);
+	posicionesDeLaPista.add(otraPosicionDeLaPista2);
+	posicionesDeLaPista.add(ultimaPosicionDeLaPista);
+
+	PistaSimple pista = new PistaSimple(unPlano,posicionesDeLaPista);
+
+	pista.llegadaDeAvionPesado(avion);
+
+	assertTrue(!avion.aterrizo());
+}
+
+public void testLlegadaDeUnAvionPesadoALaPistaSimpleEnUnaDireccionQueNoEsLaDeEntradaNoDeberiaAterrizar(){
+	
+	int velocidadDelAvion = 1;
+	int dimension = 7;
+	Escenario unPlano = new Escenario(dimension);
+	ArrayList<Posicion> posicionesDeLaPista = new ArrayList<Posicion>();
+	AvionPesado avion = new AvionPesado(velocidadDelAvion,dimension,unPlano);
+	
+	avion.moverse();
+	
+	/*creo las posiciones de la pista*/
+	Posicion posicionDeEntrada = new Posicion(1,1);
+	Posicion otraPosicionDeLaPista = new Posicion(1,2);
+	Posicion otraPosicionDeLaPista1 = new Posicion(1,3);
+	Posicion otraPosicionDeLaPista2 = new Posicion(1,4);
+	Posicion ultimaPosicionDeLaPista = new Posicion(1,5);
+	
+	posicionesDeLaPista.add(posicionDeEntrada);
+	posicionesDeLaPista.add(otraPosicionDeLaPista);
+	posicionesDeLaPista.add(otraPosicionDeLaPista1);
+	posicionesDeLaPista.add(otraPosicionDeLaPista2);
+	posicionesDeLaPista.add(ultimaPosicionDeLaPista);
+	
+	PistaSimple pista = new PistaSimple(unPlano,posicionesDeLaPista);
+	
+	pista.llegadaDeAvionPesado(avion);
+	
+	assertTrue(!avion.aterrizo());
+}
+
+public void testLlegadaDeUnAvionPesadoALaPistaSimpleEnUnaPosicionQueNoEsLaDeEntradaNoDeberiaAterrizar(){
+	
+	int velocidadDelAvion = 2;
+	int dimension = 7;
+	Escenario unPlano = new Escenario(dimension);
+	ArrayList<Posicion> posicionesDeLaPista = new ArrayList<Posicion>();
+	AvionPesado avion = new AvionPesado(velocidadDelAvion,dimension,unPlano);
+	
+	avion.moverse();
+	
+	/*creo las posiciones de la pista*/
+	Posicion posicionDeEntrada = new Posicion(1,2);
+	Posicion otraPosicionDeLaPista = new Posicion(2,2);
+	Posicion otraPosicionDeLaPista1 = new Posicion(3,2);
+	Posicion otraPosicionDeLaPista2 = new Posicion(4,2);
+	Posicion ultimaPosicionDeLaPista = new Posicion(5,2);
+	
+	posicionesDeLaPista.add(posicionDeEntrada);
+	posicionesDeLaPista.add(otraPosicionDeLaPista);
+	posicionesDeLaPista.add(otraPosicionDeLaPista1);
+	posicionesDeLaPista.add(otraPosicionDeLaPista2);
+	posicionesDeLaPista.add(ultimaPosicionDeLaPista);
+	
+	PistaSimple pista = new PistaSimple(unPlano,posicionesDeLaPista);
+	
+	pista.llegadaDeAvionPesado(avion);
+	
+	assertTrue(!avion.aterrizo());
+}
+		
 
 }

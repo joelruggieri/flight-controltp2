@@ -93,10 +93,14 @@ public class Posicion {
 		this.y= valorY;
 	}
 	
-	public void InvertirDireccion(){
+	public Posicion InvertirDireccion(){
 		
-		this.x = this.getPosicionX() * (-1);
-		this.y = this.getPosicionY() * (-1);
+		int nuevoX = this.getPosicionX() * (-1);
+		int nuevoY = this.getPosicionY() * (-1);
+		
+		return (new Posicion(nuevoX,nuevoY));
+		
+	
 	}
 	
 	public void canonizarPosicion(){
