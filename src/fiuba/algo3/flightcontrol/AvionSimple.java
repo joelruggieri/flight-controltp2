@@ -1,12 +1,16 @@
 package fiuba.algo3.flightcontrol;
 
+import java.util.ArrayList;
+
 public class AvionSimple extends ObjetoVolador {	
 	
+	
+	
 	public AvionSimple(int velocidadInicial, int limite, Escenario unPlano){
-		/* Constructor de una avion simle */
+		/* Constructor de una avion simple */
 		super (velocidadInicial, limite, unPlano);
-		
-		this.tipoDeObjetoVolador = "avionSimple" ;
+		listaDePosiciones  = new ArrayList<Posicion>();
+		this.crearTrayectoria (listaDePosiciones);
 		
 	}
 	
@@ -14,19 +18,21 @@ public class AvionSimple extends ObjetoVolador {
 		/* Mueve el objeto volador siguiendo la trayectoria o en el sentido de la direccion si no hay trayectoria definida */
 		/* post: cambia el valor de la posicion actual, buscando el movimiento mas optimo posible */
 		
-		this.plano.posicionQuedaVacio(posicionActual);
-		
-		if (this.trayectoria.getPrimerPosicion() == null){
+		if (!this.trayectoria.hayTrayectoria()){
+					
+			direccion = this.getDireccion();
+			Posicion posicionSiguiente = direccion.sumar(this.posicionActual);
 			
-			this.posicionActual = this.posicionActual.sumar(this.direccion);
+			listaDePosiciones = new ArrayList <Posicion> ();
+			listaDePosiciones.add(posicionSiguiente);
 			
-		}else{
-			
-			this.trayectoria.getProximaPosicion(posicionActual);
-			
+			this.crearTrayectoria(listaDePosiciones);
+	
 		}
 		
-			this.plano.posicionOcupadaPor(posicionActual, "objetoVolador");
-		}
+		super.moverse();
 	}
+		
+	
+}
 
