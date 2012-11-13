@@ -49,19 +49,23 @@ public class Trayectoria {
 	}
 	
 	private Posicion canonizarDireccion (Posicion posicion){
+		/* Convierte la posicion que fue pasada por parametro a otra posicion donde
+		 * sus componentes son solo ceros, unos o unos negativos.
+		 * pre: posicion debe ser una Posicion
+		 * post: devuelve una posicion canonizada.
+		 */
 		
 		int x = posicion.getPosicionX();
 		int y = posicion.getPosicionY();
-		int direccionX, direccionY;
-		
-		//Para conservar el signo de la direccion.
-		direccionX = x / Math.abs(x);
-		direccionY = y / Math.abs(y);
-		
-		if (x < y){
-			direccionX = 0;
-		}else if (x > y){
-			direccionY = 0;
+		int absX = Math.abs(x);
+		int absY = Math.abs(y);
+		int direccionX = 0, direccionY = 0;
+				
+		if (absX != 0){
+			direccionX = x / absX;
+		}
+		if (absY != 0){
+			direccionY = y / absY;
 		}
 		
 		return (new Posicion (direccionX,direccionY));
@@ -84,5 +88,9 @@ public class Trayectoria {
 		
 		return direccion;
 	}
-		
+	
+	public boolean hayTrayectoria (){
+		/* Devuelve si la trayectoria tiene alguna posicion siguiente para seguir */
+		return (!this.listaDePosiciones.isEmpty());
+	}
 }

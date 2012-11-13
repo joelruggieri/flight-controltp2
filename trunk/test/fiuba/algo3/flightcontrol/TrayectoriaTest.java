@@ -18,97 +18,112 @@ public class TrayectoriaTest extends TestCase {
 	public void testProximaPosicionDeberiaRetornarUnaPosicionParaContinuarConlaDireccionQueTraia(){
 		
 		//arrange	
-		destino = new Posicion (4, 4);
-		proximoPaso = new Posicion (2,2);
-		Posicion proximaPosicion;
+			destino = new Posicion (4, 4);
+			proximoPaso = new Posicion (2,2);
+			Posicion proximaPosicion;
 		
-		puntos.add(destino);		
+			puntos.add(destino);		
 		
-		trayectoria = new Trayectoria (puntos);
+			trayectoria = new Trayectoria (puntos);
+			
 		//act
-		
-		proximaPosicion = trayectoria.getProximaPosicion(actual);
+			proximaPosicion = trayectoria.getProximaPosicion(actual);
 				
 		//assert
-		assertTrue (proximaPosicion.equals(proximoPaso));
+			assertTrue (proximaPosicion.equals(proximoPaso));
 	}
 	
 	public void testObtenerVectorDirectorDeberiaDarUnVectorQueIndiqueLaDireccionASeguirParaLlegarADestino (){
 		
 		//arrange
-		destino = new Posicion (4, 4);
-		Posicion direccion = new Posicion (1,1);
+			destino = new Posicion (4, 4);
+			Posicion direccion = new Posicion (1,1);
 		
-		puntos.add(destino);
+			puntos.add(destino);
 		
-		trayectoria = new Trayectoria (puntos);
+			trayectoria = new Trayectoria (puntos);
 		
 		//act
-		Posicion direccionDeLaTrayectoria = trayectoria.getVectorDirector(actual);
+			Posicion direccionDeLaTrayectoria = trayectoria.getVectorDirector(actual);
 				
 		//assert
-		assertTrue (direccionDeLaTrayectoria.equals(direccion));
+			assertTrue (direccionDeLaTrayectoria.equals(direccion));
 	}
 	
 	public void testRecorrerLaTrayectoriaDeberiaObtenerTodosLosPuntosCorrectamente (){
 		
 		//arrange
-		destino = new Posicion (7,5);
-		proximoPaso = new Posicion (1,1);
-		Posicion direccion;
-		boolean pasoCorrecto = true;
-		
-		puntos.add(destino);
-		trayectoria = new Trayectoria (puntos);
+			destino = new Posicion (7,5);
+			proximoPaso = new Posicion (1,1);
+			Posicion direccion;
+			boolean pasoCorrecto = true;
 		
 		//act
+			puntos.add(destino);
+			trayectoria = new Trayectoria (puntos);
 		
-		//Primero se mueve en linea recta
+			//Luego se mueve diagonalmente
 		
-		direccion = new Posicion (1,0);
-		while (pasoCorrecto){
+			direccion = new Posicion (1,1);
+				
+			while (pasoCorrecto){
 			
-			proximoPaso = trayectoria.getProximaPosicion(actual);
-			actual = actual.sumar(direccion);
+				proximoPaso = trayectoria.getProximaPosicion(actual);
+				actual = actual.sumar(direccion);
+				pasoCorrecto = actual.equals(proximoPaso);
+			}
+			
+			//Primero se mueve en linea recta
+			
+			direccion = new Posicion (1,0);
+			actual = proximoPaso;
 			pasoCorrecto = actual.equals(proximoPaso);
-			
-		}
 		
-		//Luego se mueve diagonalmente
-		
-		direccion = new Posicion (1,1);
-		actual = proximoPaso;
-		pasoCorrecto = actual.equals(proximoPaso);
-		
-		while (pasoCorrecto && ! proximoPaso.equals(destino)){
+			while (pasoCorrecto && ! proximoPaso.equals(destino)){
 			
-			proximoPaso = trayectoria.getProximaPosicion(actual);
-			
-			actual = actual.sumar(direccion);
-			
-			pasoCorrecto = actual.equals(proximoPaso);
-			
-			
-		}
-		
+				proximoPaso = trayectoria.getProximaPosicion(actual);
+				actual = actual.sumar(direccion);
+				pasoCorrecto = actual.equals(proximoPaso);
+			}
+				
 		//assert
-		assertTrue (pasoCorrecto);
+			assertTrue (pasoCorrecto);
 	}
 	
 	public void testDespuesDeObtenerLaUltimaPosicionDeLaTrayectoriaDeberiaDevolverNull (){
 		
 		//arrange
-		destino = new Posicion (2,2);
-		puntos.add(destino);
-		trayectoria = new Trayectoria (puntos);
+			destino = new Posicion (2,2);
+			puntos.add(destino);
+			trayectoria = new Trayectoria (puntos);
 		
 		//act
-		proximoPaso = trayectoria.getProximaPosicion(actual);
-		proximoPaso = trayectoria.getProximaPosicion(actual);
+			proximoPaso = trayectoria.getProximaPosicion(actual);
+			proximoPaso = trayectoria.getProximaPosicion(actual);
 		
 		//assert
-		assertTrue (proximoPaso == null);
+			assertTrue (proximoPaso == null);
 		
+	}
+	
+	public void testCuandoNoHayPuntosASeguirDeberiaDevolverQueNoHayTrayectoria (){
+		
+		//arrange and act
+			trayectoria = new Trayectoria (puntos);
+
+		//assert
+			assertFalse (trayectoria.hayTrayectoria());
+	}
+	
+	public void testCuandoHayPuntosASeguirDeberiaDevolverQueHayTrayectoria (){
+		
+		//arrange and act
+			destino = new Posicion (5,2);
+			puntos.add(destino);
+			trayectoria = new Trayectoria (puntos);
+		
+		//assert
+			assertTrue (trayectoria.hayTrayectoria());
 	}
 
 }

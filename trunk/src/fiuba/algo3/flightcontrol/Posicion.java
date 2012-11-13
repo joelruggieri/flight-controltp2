@@ -88,12 +88,16 @@ public class Posicion {
 	}
 
 	public void ActualizarCoordenadas(int valorX, int valorY){
+		/* Se reescriben las coordenadas de la posicion */
+		/* pre: se deben ingresar dos enteros */
+		/* post: la posicion cambio sus valores */
 		
 		this.x= valorX;
 		this.y= valorY;
 	}
 	
 	public Posicion InvertirDireccion(){
+		/* Invierte la posicion del avion, causando un efecto rebote */
 		
 		int nuevoX = this.getPosicionX() * (-1);
 		int nuevoY = this.getPosicionY() * (-1);
@@ -104,6 +108,11 @@ public class Posicion {
 	}
 	
 	public void canonizarPosicion(){
+		/* Convierte la posicion que fue pasada por parametro a otra posicion donde
+		 * sus componentes son solo ceros, unos o unos negativos.
+		 * pre: posicion debe ser una Posicion
+		 * post: devuelve una posicion canonizada.
+		 */
 		
 		if(this.getPosicionX() != 0){
 			this.x = this.getPosicionX() / (Math.abs(getPosicionX()));
@@ -112,4 +121,5 @@ public class Posicion {
 			this.y = this.getPosicionY() / (Math.abs(getPosicionY()));
 		}
 	}
+	
 }
