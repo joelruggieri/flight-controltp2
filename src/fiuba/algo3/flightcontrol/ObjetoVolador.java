@@ -1,100 +1,117 @@
 package fiuba.algo3.flightcontrol;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
-public class ObjetoVolador {
+public abstract class ObjetoVolador {
 	
-	private int velocidad;
-	protected Posicion posicionActual;
+	protected Vector posicionActual,direccion;
 	protected boolean aterrizado; 
-	protected Posicion direccion;
 	protected Trayectoria trayectoria;
 	protected Escenario plano;
-	protected ArrayList<Posicion> listaDePosiciones;
+	protected List <Vector> listaDePosiciones;
+	protected int velocidad,contadorDeTurnos,limite;
+	protected int prueba;
 	
-	
-	public ObjetoVolador(int velocidad, int limite, Escenario unPlano){
-		/* Constructor del Objeto volador */
-		
-		int valorDeSalidaX = 0;
-		int valorDeSalidaY = 0;
-		//ArrayList<Posicion> trayectoriaVacia = new ArrayList<Posicion>();
-		
+	public ObjetoVolador(int nivel, Escenario unPlano){
+						
 		this.plano = unPlano;
-		this.posicionActual = new Posicion(valorDeSalidaX, valorDeSalidaY);
+		this.limite = unPlano.getDimension();
 		
-		this.plano.posicionOcupadaPor(posicionActual, "objetoVolador");
+		this.posicionActual = this.generarPosicionDeSalidaAleatoria(limite-1);
+		this.plano.ocuparPosicion(posicionActual, "objetoVolador");
 		
-		this.direccion = new Posicion (1,1);
+		this.direccion = new Vector (1,1);
 		this.aterrizado = false;
-		//this.trayectoria = new Trayectoria(trayectoriaVacia);
-		this.velocidad = velocidad;
+		
+		this.velocidad = nivel;
+		contadorDeTurnos = 0;
 		
 	}
 	
-	public void crearTrayectoria(ArrayList<Posicion> unaTrayectoriaNueva){
-		/* Crea una nueva trayectoria para el objeto volador */
+	public void vivir (){
+		this.mover();
+	}
+	
+	private Vector generarPosicionDeSalidaAleatoria (int limite){
+		/* Genera una posicion random de salida de un avion. 
+		 * Esta posicion se da siempre en alguno de los cuatro bordes */
+				
+		Random generadorDeRandoms = new Random ();
 		
-		this.trayectoria = new Trayectoria(unaTrayectoriaNueva);
-		this.actualizarDireccion(this.trayectoria.getVectorDirector(this.posicionActual));
+		int pared = generadorDeRandoms.nextInt (2)*(limite);
+		int borde = generadorDeRandoms.nextInt (2);
+		int valorDeSalidaX = 0;
+		int valorDeSalidaY = 0;
+				
 		
+		if (borde == 0){
+			valorDeSalidaX = pared;
+			valorDeSalidaY = generadorDeRandoms.nextInt (limite);
+		}else{
+			valorDeSalidaX = generadorDeRandoms.nextInt (limite);;
+			valorDeSalidaY = pared;
+		}
+		
+		return (new Vector (valorDeSalidaX,valorDeSalidaY));
+	}
+	
+	
+	public boolean hayTrayectoria(){
+		
+		return (this.trayectoria.hayTrayectoria());	
 	}
 	
 	public void aterrizar(){
-		/* Aterriza el objeto volador en una Pista */
-		/* pre: debe de aterrizar */
-		/* post: cambia el estado del objeto volador a aterrizado */
-		
+				
 		this.aterrizado = true;
-		this.plano.posicionOcupadaPor(posicionActual, "pista");
+		this.plano.ocuparPosicion(posicionActual, "pista");
 	}
 
-	public Posicion getPosicion(){
-		/* Devuelve la posicion actual del objeto volador */
-		
+	public Vector getPosicion(){
+				
 		return this.posicionActual;
 	}
 		
-	public Posicion getDireccion(){
-		/* Devuelve la direccion actual del objeto volador */
-		
+	public Vector getDireccion(){
+				
 		return this.direccion;
-		
-	}
-		
-	public void moverse(){
-		/* Mueve al avion siguiendo su trayectoria */
-		
-		Posicion siguientePosicion;
-		boolean tocaUnBorde;
-		
-		siguientePosicion = this.trayectoria.getProximaPosicion(this.posicionActual);
-		
-		for (int i=0; i < this.velocidad; i++){
-						
-			this.actualizarDireccion (this.trayectoria.getVectorDirector(posicionActual));
-			
-			//Validar bordes.
-			tocaUnBorde = this.validarBordes (siguientePosicion);
-			
-			if (tocaUnBorde){
-				this.invertirTrayectoria(siguientePosicion);
-			}
-			
-			this.posicionActual = siguientePosicion;
-			
-		}
-		
 	}
 	
+    private void mover(){
+        
+    	boolean tocaUnBorde;
+        contadorDeTurnos ++;
+                      
+        if (contadorDeTurnos == this.velocidad){
+        	
+	    	contadorDeTurnos = 0;
+	        		    	
+	        Vector siguientePosicion = this.getProximaPosicion();
+	        this.actualizarDireccion (siguientePosicion);
+	        
+	        //Validar bordes.
+	        tocaUnBorde = this.validarBordes (siguientePosicion);
+	               
+	        if (tocaUnBorde){
+	        	
+	            this.invertirTrayectoria(siguientePosicion);
+	        }
+	        	        
+	        this.posicionActual = siguientePosicion;
+	        
+	        if (this.trayectoria.getProximaPosicion().equals(this.posicionActual)){
+				this.trayectoria.borrarPosicion();
+	        }
+        }
+    }
+	
 	public boolean aterrizo(){
-		/* Devuelve si el avion aterrizo o no */
+		
 		return this.aterrizado;		
 	}
 	
-	private boolean validarBordes (Posicion posicion){
+	private boolean validarBordes (Vector posicion){
 		/* Devuelve si una posicion toca un borde o no */
-		/* pre: Se debe ingresar una posicion */
-		/* post: Devuelve un booleano */
 		
 		int x = posicion.getPosicionX();
 		int y = posicion.getPosicionY();
@@ -104,10 +121,11 @@ public class ObjetoVolador {
 		return (x == 0 || y == 0 || x == limite || y == limite);
 	}
 		
-	private void invertirTrayectoria (Posicion posicionLimite){
-		/* Invierte la trayectoria del avion, causando un efecto rebote */
+	private void invertirTrayectoria (Vector posicionLimite){
+		/* Invierte la trayectoria del objeto volador,
+		 * actualizando su direccion y su posicion */
 		
-		Posicion nuevaDireccion;
+		Vector nuevaDireccion;
 		int dimension = this.plano.getDimension();
 		
 		int x = this.getDireccion().getPosicionX();
@@ -125,17 +143,31 @@ public class ObjetoVolador {
 			y = y*(-1);
 		}
 		
-		nuevaDireccion = new Posicion (x,y);
-		this.actualizarDireccion(nuevaDireccion);
+		nuevaDireccion = new Vector (x,y);
+		this.direccion = nuevaDireccion;
 		
 	}
 	
-	private void actualizarDireccion (Posicion unaDireccion){
-		/* Actualiza la direccion del avion */
+	private void actualizarDireccion (Vector destino){
 		
-		if (unaDireccion != null){
-			this.direccion = unaDireccion;
-		}
+		this.direccion = destino.restar(this.posicionActual);
+		this.direccion.canonizarPosicion();
+		
 	}
+		
+	private Vector getProximaPosicion(){
+			
+		Vector destino = this.trayectoria.getProximaPosicion();
+		this.actualizarDireccion(destino);
+		Vector proximaPosicion = this.direccion.sumar (posicionActual);
+		return proximaPosicion;
+		
+	}
+	
+	public void setTrayectoria (Trayectoria unaTrayectoria){
+		
+		this.trayectoria = unaTrayectoria;
+	}
+		
 }
 	
