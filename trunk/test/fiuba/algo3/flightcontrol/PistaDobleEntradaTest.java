@@ -44,7 +44,7 @@ public class PistaDobleEntradaTest extends TestCase {
 		unaTrayectoria = new Trayectoria (listaDePosiciones);
 		unAvion.setTrayectoria(unaTrayectoria);
 		
-		while (!unAvion.getPosicion().equals(destino)){
+		while (!unAvion.getPosicion().esIgual(destino)){
 			unAvion.vivir();
 		}
 		
@@ -69,29 +69,6 @@ public class PistaDobleEntradaTest extends TestCase {
 		//assert	
 		assertEquals(unPlano.getPosicion(VectorDeEntrada),"pista");
 		assertEquals(unPlano.getPosicion(otraVectorDeLaPista),"pista");
-	}
-
-	public void testConstructorDeUnaPistaDobleEntradaDeberianQuedarDefinidasLasDosdireccionesDeEntrada() 
-		throws PosicionFueraDeLasDimensionesEstablecidasException{
-		
-		//arrange
-		
-		/*creo las Vectores de la pista*/
-		Vector VectorDeEntrada = new Vector(4,1);
-		Vector otraVectorDeLaPista = new Vector(3,2);
-			
-		//act
-		listaDePosiciones.add(VectorDeEntrada);
-		listaDePosiciones.add(otraVectorDeLaPista);
-	
-		PistaDobleEntrada pista = new PistaDobleEntrada(unPlano,listaDePosiciones);
-	
-		Vector direccionDePrimeraEntrada = new Vector(-1,1);
-		Vector direccionDeSegundaEntrada = new Vector(1,-1);
-			
-		//assert
-		assertTrue(pista.direccionesDeIngreso.get(0).equals(direccionDePrimeraEntrada));
-		assertTrue(pista.direccionesDeIngreso.get(1).equals(direccionDeSegundaEntrada));
 	}
 
 	public void testValidarEntradaYDireccionDeUnAvionQueSeEncuentreEnAlgunaDeLasVectoresDeEntradaYConLaDireccionAdecuadaDeberiaDarVerdadero(){
@@ -239,7 +216,7 @@ public class PistaDobleEntradaTest extends TestCase {
 	}
 
 
-	public void testLlegadaDeUnHelicopteroALaPistaDobleEntradaEnUnaVectorQueEsLaDeEntradaYConDireccionApropiadaDeberiaAterrizar(){
+	public void testLlegadaDeUnHelicopteroALaPistaDobleEntradaEnUnaVectorQueEsLaDeEntradaYConDireccionApropiadaNoDeberiaAterrizar(){
 		
 		//arrange
 		
@@ -265,7 +242,7 @@ public class PistaDobleEntradaTest extends TestCase {
 		pista.recibirAterrizajeDeHelicoptero(helicoptero);
 		
 		//assert
-		assertTrue(helicoptero.aterrizo());
+		assertTrue(!helicoptero.aterrizo());
 		
 	}
 

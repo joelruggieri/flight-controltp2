@@ -44,7 +44,7 @@ public class PistaSimpleTest extends TestCase {
 		unaTrayectoria = new Trayectoria (posicionesDestino);
 		unAvion.setTrayectoria(unaTrayectoria);
 		
-		while (!unAvion.getPosicion().equals(destino)){
+		while (!unAvion.getPosicion().esIgual(destino)){
 			unAvion.vivir();
 		}
 		
@@ -230,7 +230,7 @@ public void testLlegadaDeUnAvionSimpleALaPistaSimpleEnUnaDireccionQueNoEsLaDeEnt
 	}
 
 
-	public void testLlegadaDeUnAvionHelicopteroALaPistaSimpleEnUnaVectorQueEsLaDeEntradaYConDireccionApropiadaDeberiaAterrizar(){
+	public void testLlegadaDeUnAvionHelicopteroALaPistaSimpleEnUnaVectorQueEsLaDeEntradaYConDireccionApropiadaNoDeberiaAterrizar(){
 		
 		//arrange
 	
@@ -255,7 +255,7 @@ public void testLlegadaDeUnAvionSimpleALaPistaSimpleEnUnaDireccionQueNoEsLaDeEnt
 		pista.recibirAterrizajeDeHelicoptero(helicoptero);
 		
 		//assert
-		assertTrue(helicoptero.aterrizo());
+		assertTrue(!helicoptero.aterrizo());
 	}
 	
 	public void testLlegadaDeUnAvionHelicopteroALaPistaSimpleEnUnaDireccionQueNoEsLaDeEntradaNoDeberiaAterrizar(){
