@@ -7,8 +7,8 @@ import java.util.List;
 public class PistaDobleEntradaTest extends TestCase {
 	
 	private Vector posicion0,posicion1,posicion2,posicion3,posicion4,posicion5;
-	int nivel,dimension;
-	private Escenario unPlano;
+	int velocidad,dimension;
+	private Nivel unNivel;
 	private List<Vector> listaDePosiciones;
 	private Trayectoria unaTrayectoria;
 	private AvionSimple avion;
@@ -25,14 +25,15 @@ public class PistaDobleEntradaTest extends TestCase {
 		posicion3 = new Vector(1,2);
 		posicion4 = new Vector (5,5);
 		posicion5 = new Vector (6,6);
-		nivel = 1;
+		velocidad = 1;
 		dimension = 768;
-		unPlano = new Escenario(dimension);
+		unNivel = new Nivel(velocidad, dimension);
 		
 		listaDePosiciones = new ArrayList<Vector>();
-		avion = new AvionSimple(nivel,unPlano);
-		helicoptero = new Helicoptero(nivel,unPlano);
-		avionPesado = new AvionPesado(nivel,unPlano);
+
+		avion = new AvionSimple(velocidad,unNivel);
+		helicoptero = new Helicoptero(velocidad,unNivel);
+		avionPesado = new AvionPesado(velocidad,unNivel);
 	}
 	
 	private void moverAvion (ObjetoVolador unAvion, Vector destino){
@@ -50,12 +51,15 @@ public class PistaDobleEntradaTest extends TestCase {
 		
 	}
 		
-	public void testConstructorDeUnaPistaDobleEntradaLasVectoresDeLaPistaDeberianEstarOcupadasPorEsta() 
-		throws PosicionFueraDeLasDimensionesEstablecidasException{
+	
+	//public void testConstructorDeUnaPistaDobleEntradaLasVectoresDeLaPistaDeberianEstarOcupadasPorEsta() 
+		//throws PosicionFueraDeLasDimensionesEstablecidasException{
 	
 		//arrange
 			
 		/*creo las Vectores de la pista*/
+	
+	/*
 		Vector VectorDeEntrada = new Vector(4,1);
 		Vector otraVectorDeLaPista = new Vector(3,2);
 			
@@ -71,6 +75,29 @@ public class PistaDobleEntradaTest extends TestCase {
 		assertEquals(unPlano.getPosicion(otraVectorDeLaPista),"pista");
 	}
 
+	public void testConstructorDeUnaPistaDobleEntradaDeberianQuedarDefinidasLasDosdireccionesDeEntrada() 
+		throws PosicionFueraDeLasDimensionesEstablecidasException{
+		
+		//arrange
+		
+		// creo las Vectores de la pista
+		Vector VectorDeEntrada = new Vector(4,1);
+		Vector otraVectorDeLaPista = new Vector(3,2);
+			
+		//act
+		listaDePosiciones.add(VectorDeEntrada);
+		listaDePosiciones.add(otraVectorDeLaPista);
+	
+		PistaDobleEntrada pista = new PistaDobleEntrada(unPlano,listaDePosiciones);
+	
+		Vector direccionDePrimeraEntrada = new Vector(-1,1);
+		Vector direccionDeSegundaEntrada = new Vector(1,-1);
+			
+		//assert
+		assertTrue(pista.direccionesDeIngreso.get(0).esIgual(direccionDePrimeraEntrada));
+		assertTrue(pista.direccionesDeIngreso.get(1).esIgual(direccionDeSegundaEntrada));
+	}
+	*/
 	public void testValidarEntradaYDireccionDeUnAvionQueSeEncuentreEnAlgunaDeLasVectoresDeEntradaYConLaDireccionAdecuadaDeberiaDarVerdadero(){
 		
 		//arrange
@@ -93,7 +120,7 @@ public class PistaDobleEntradaTest extends TestCase {
 		listaDePosiciones.add(otraVectorDeLaPista2);
 		listaDePosiciones.add(ultimaVectorDeLaPista);
 	
-		PistaDobleEntrada pista = new PistaDobleEntrada(unPlano,listaDePosiciones);
+		PistaDobleEntrada pista = new PistaDobleEntrada(listaDePosiciones);
 		
 		//assert
 		assertTrue(pista.validarEntradaYDireccion(avion));
@@ -121,7 +148,7 @@ public class PistaDobleEntradaTest extends TestCase {
 		listaDePosiciones.add(otraVectorDeLaPista2);
 		listaDePosiciones.add(ultimaVectorDeLaPista);
 	
-		PistaDobleEntrada pista = new PistaDobleEntrada(unPlano,listaDePosiciones);
+		PistaDobleEntrada pista = new PistaDobleEntrada(listaDePosiciones);
 	
 		//assert
 		assertTrue(!pista.validarEntradaYDireccion(avion));
@@ -150,9 +177,9 @@ public class PistaDobleEntradaTest extends TestCase {
 		listaDePosiciones.add(otraVectorDeLaPista2);
 		listaDePosiciones.add(ultimaVectorDeLaPista);
 		
-		PistaDobleEntrada pista = new PistaDobleEntrada(unPlano,listaDePosiciones);
+		PistaDobleEntrada pista = new PistaDobleEntrada(listaDePosiciones);
 		
-		pista.recibirAterrizajeDeAvionSimple(avion);
+		pista.recibirAterrizajeDeObjetoVolador(avion);
 		
 		//assert
 		assertTrue(avion.aterrizo());
@@ -179,9 +206,9 @@ public class PistaDobleEntradaTest extends TestCase {
 		listaDePosiciones.add(otraVectorDeLaPista2);
 		listaDePosiciones.add(ultimaVectorDeLaPista);
 		
-		PistaDobleEntrada pista = new PistaDobleEntrada(unPlano,listaDePosiciones);
+		PistaDobleEntrada pista = new PistaDobleEntrada(listaDePosiciones);
 		
-		pista.recibirAterrizajeDeAvionSimple(avion);
+		pista.recibirAterrizajeDeObjetoVolador(avion);
 	
 		//assert
 		assertTrue(!avion.aterrizo());
@@ -207,9 +234,9 @@ public class PistaDobleEntradaTest extends TestCase {
 		listaDePosiciones.add(otraVectorDeLaPista2);
 		listaDePosiciones.add(ultimaVectorDeLaPista);
 		
-		PistaDobleEntrada pista = new PistaDobleEntrada(unPlano,listaDePosiciones);
+		PistaDobleEntrada pista = new PistaDobleEntrada(listaDePosiciones);
 		
-		pista.recibirAterrizajeDeAvionSimple(avion);
+		pista.recibirAterrizajeDeObjetoVolador(avion);
 	
 		//assert
 		assertTrue(!avion.aterrizo());
@@ -238,8 +265,8 @@ public class PistaDobleEntradaTest extends TestCase {
 		
 		//act
 	
-		PistaDobleEntrada pista = new PistaDobleEntrada(unPlano,listaDePosiciones);
-		pista.recibirAterrizajeDeHelicoptero(helicoptero);
+		PistaDobleEntrada pista = new PistaDobleEntrada(listaDePosiciones);
+		pista.recibirAterrizajeDeObjetoVolador(helicoptero);
 		
 		//assert
 		assertTrue(!helicoptero.aterrizo());
@@ -253,7 +280,7 @@ public class PistaDobleEntradaTest extends TestCase {
 		this.moverAvion(helicoptero,posicion2);
 		this.moverAvion(helicoptero,posicion1);
 		//act
-		helicoptero.mover();
+		helicoptero.vivir();
 		
 		/*creo las Vectores de la pista*/
 		Vector VectorDeEntrada = new Vector(1,1);
@@ -268,8 +295,8 @@ public class PistaDobleEntradaTest extends TestCase {
 		listaDePosiciones.add(otraVectorDeLaPista2);
 		listaDePosiciones.add(ultimaVectorDeLaPista);
 		
-		PistaDobleEntrada pista = new PistaDobleEntrada(unPlano,listaDePosiciones);
-		pista.recibirAterrizajeDeHelicoptero(helicoptero);
+		PistaDobleEntrada pista = new PistaDobleEntrada(listaDePosiciones);
+		pista.recibirAterrizajeDeObjetoVolador(helicoptero);
 		
 		//assert
 		assertTrue(!helicoptero.aterrizo());
@@ -295,8 +322,8 @@ public class PistaDobleEntradaTest extends TestCase {
 		listaDePosiciones.add(otraVectorDeLaPista2);
 		listaDePosiciones.add(ultimaVectorDeLaPista);
 		
-		PistaDobleEntrada pista = new PistaDobleEntrada(unPlano,listaDePosiciones);
-		pista.recibirAterrizajeDeHelicoptero(helicoptero);
+		PistaDobleEntrada pista = new PistaDobleEntrada(listaDePosiciones);
+		pista.recibirAterrizajeDeObjetoVolador(helicoptero);
 		
 		//assert
 		assertTrue(!helicoptero.aterrizo());
@@ -325,9 +352,9 @@ public class PistaDobleEntradaTest extends TestCase {
 		listaDePosiciones.add(otraVectorDeLaPista2);
 		listaDePosiciones.add(ultimaVectorDeLaPista);
 	
-		PistaDobleEntrada pista = new PistaDobleEntrada(unPlano,listaDePosiciones);
+		PistaDobleEntrada pista = new PistaDobleEntrada(listaDePosiciones);
 	
-		pista.recibirAterrizajeDeAvionPesado(avionPesado);
+		pista.recibirAterrizajeDeObjetoVolador(avionPesado);
 	
 		//assert
 		assertTrue(!avionPesado.aterrizo());
@@ -356,9 +383,9 @@ public class PistaDobleEntradaTest extends TestCase {
 		listaDePosiciones.add(otraVectorDeLaPista2);
 		listaDePosiciones.add(ultimaVectorDeLaPista);
 		
-		PistaDobleEntrada pista = new PistaDobleEntrada(unPlano,listaDePosiciones);
+		PistaDobleEntrada pista = new PistaDobleEntrada(listaDePosiciones);
 		
-		pista.recibirAterrizajeDeAvionPesado(avionPesado);
+		pista.recibirAterrizajeDeObjetoVolador(avionPesado);
 	
 		//assert
 		assertTrue(!avionPesado.aterrizo());
@@ -384,9 +411,9 @@ public class PistaDobleEntradaTest extends TestCase {
 		listaDePosiciones.add(otraVectorDeLaPista2);
 		listaDePosiciones.add(ultimaVectorDeLaPista);
 		
-		PistaDobleEntrada pista = new PistaDobleEntrada(unPlano,listaDePosiciones);
+		PistaDobleEntrada pista = new PistaDobleEntrada(listaDePosiciones);
 		
-		pista.recibirAterrizajeDeAvionPesado(avionPesado);
+		pista.recibirAterrizajeDeObjetoVolador(avionPesado);
 		
 		//assert
 		assertTrue(!avionPesado.aterrizo());

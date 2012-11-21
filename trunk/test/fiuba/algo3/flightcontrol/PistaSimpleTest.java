@@ -9,11 +9,12 @@ public class PistaSimpleTest extends TestCase {
 	private List <Vector> posicionesDestino,posicionesDeLaPista;
 	private Trayectoria unaTrayectoria;
 	private Vector posicion1,posicion2,posicion3;
-	private int nivel,dimension;
-	private Escenario unPlano;
+	private int velocidad,dimension;
+	private Nivel unNivel;
 	private AvionSimple avion;
 	private Helicoptero helicoptero;
 	private AvionPesado avionPesado;
+	
 	
 	protected void setUp () throws Exception {
 		super.setUp();
@@ -25,13 +26,14 @@ public class PistaSimpleTest extends TestCase {
 		posicionesDestino = new ArrayList <Vector>();
 		posicionesDeLaPista = new ArrayList <Vector>();
 		
-		nivel = 1;
+		velocidad = 1;
 		dimension = 768;
-		unPlano = new Escenario(dimension);
+		unNivel = new Nivel(velocidad, dimension);
 				
-		avion = new AvionSimple(nivel,unPlano);
-		helicoptero = new Helicoptero(nivel,unPlano);
-		avionPesado = new AvionPesado(nivel,unPlano);
+		avion = new AvionSimple(velocidad, unNivel);
+		helicoptero = new Helicoptero(velocidad, unNivel);
+		avionPesado = new AvionPesado(velocidad, unNivel);
+		
 		
 	}
 	
@@ -48,25 +50,6 @@ public class PistaSimpleTest extends TestCase {
 			unAvion.vivir();
 		}
 		
-	}
-	
-	public void testConstructorDeUnaPistaSimpleLasposicionesDeLaPistaDeberianEstarOcupadasPorEsta() throws PosicionFueraDeLasDimensionesEstablecidasException{
-		
-		//arrange
-		
-		/*creo las Vectores de la pista*/
-		Vector posicionDeEntrada = new Vector(4,1);
-		Vector otraPosicionDeLaPista = new Vector(3,2);
-	
-		//act
-		posicionesDeLaPista.add(posicionDeEntrada);
-		posicionesDeLaPista.add(otraPosicionDeLaPista);
-		
-		PistaSimple pista = new PistaSimple(unPlano,posicionesDeLaPista);
-	
-		//assert
-		assertEquals(unPlano.getPosicion(posicionDeEntrada),"pista");
-		assertEquals(unPlano.getPosicion(otraPosicionDeLaPista),"pista");
 	}
 	
 	public void testConstructorDeUnaPistaSimpleLaDireccionDeIngresoDeberiaQuedarDeterminadaSegunLaorientacionDeLaPista(){
@@ -87,7 +70,7 @@ public class PistaSimpleTest extends TestCase {
 		posicionesDeLaPista.add(otraPosicionDeLaPista2);
 		posicionesDeLaPista.add(ultimaPosicionDeLaPista);
 		
-		PistaSimple pista = new PistaSimple(unPlano,posicionesDeLaPista);
+		PistaSimple pista = new PistaSimple(posicionesDeLaPista);
 	
 		//assert	
 		assertTrue(((pista.getDireccionDeEntrada().getPosicionX()) == -1) && ((pista.getDireccionDeEntrada().getPosicionY()) == 1));
@@ -111,7 +94,7 @@ public class PistaSimpleTest extends TestCase {
 		posicionesDeLaPista.add(otraPosicionDeLaPista2);
 		posicionesDeLaPista.add(ultimaPosicionDeLaPista);
 		
-		PistaSimple pista = new PistaSimple(unPlano,posicionesDeLaPista);
+		PistaSimple pista = new PistaSimple(posicionesDeLaPista);
 		
 		//assert	
 		assertTrue(pista.getPosicionDeEntrada() == posicionDeEntrada);
@@ -136,7 +119,7 @@ public class PistaSimpleTest extends TestCase {
 		posicionesDeLaPista.add(otraPosicionDeLaPista2);
 		posicionesDeLaPista.add(ultimaPosicionDeLaPista);
 		
-		PistaSimple pista = new PistaSimple(unPlano,posicionesDeLaPista);
+		PistaSimple pista = new PistaSimple(posicionesDeLaPista);
 		
 		Vector direccion = new Vector(0,-1);
 	
@@ -165,9 +148,9 @@ public class PistaSimpleTest extends TestCase {
 		posicionesDeLaPista.add(otraPosicionDeLaPista2);
 		posicionesDeLaPista.add(ultimaPosicionDeLaPista);
 		
-		PistaSimple pista = new PistaSimple(unPlano,posicionesDeLaPista);
+		PistaSimple pista = new PistaSimple(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionSimple(avion);
+		pista.recibirAterrizajeDeObjetoVolador(avion);
 	
 		//assert
 		assertTrue(avion.aterrizo());
@@ -193,9 +176,9 @@ public void testLlegadaDeUnAvionSimpleALaPistaSimpleEnUnaDireccionQueNoEsLaDeEnt
 		posicionesDeLaPista.add(otraPosicionDeLaPista2);
 		posicionesDeLaPista.add(ultimaPosicionDeLaPista);
 		
-		PistaSimple pista = new PistaSimple(unPlano,posicionesDeLaPista);
+		PistaSimple pista = new PistaSimple(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionSimple(avion);
+		pista.recibirAterrizajeDeObjetoVolador(avion);
 		
 		//assert
 		assertTrue(!avion.aterrizo());
@@ -221,9 +204,9 @@ public void testLlegadaDeUnAvionSimpleALaPistaSimpleEnUnaDireccionQueNoEsLaDeEnt
 		posicionesDeLaPista.add(otraPosicionDeLaPista2);
 		posicionesDeLaPista.add(ultimaPosicionDeLaPista);
 		
-		PistaSimple pista = new PistaSimple(unPlano,posicionesDeLaPista);
+		PistaSimple pista = new PistaSimple(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionSimple(avion);
+		pista.recibirAterrizajeDeObjetoVolador(avion);
 	
 		//assert
 		assertTrue(!avion.aterrizo());
@@ -250,9 +233,9 @@ public void testLlegadaDeUnAvionSimpleALaPistaSimpleEnUnaDireccionQueNoEsLaDeEnt
 		posicionesDeLaPista.add(otraPosicionDeLaPista2);
 		posicionesDeLaPista.add(ultimaPosicionDeLaPista);
 	
-		PistaSimple pista = new PistaSimple(unPlano,posicionesDeLaPista);
+		PistaSimple pista = new PistaSimple(posicionesDeLaPista);
 	
-		pista.recibirAterrizajeDeHelicoptero(helicoptero);
+		pista.recibirAterrizajeDeObjetoVolador(helicoptero);
 		
 		//assert
 		assertTrue(!helicoptero.aterrizo());
@@ -280,9 +263,9 @@ public void testLlegadaDeUnAvionSimpleALaPistaSimpleEnUnaDireccionQueNoEsLaDeEnt
 		posicionesDeLaPista.add(otraPosicionDeLaPista2);
 		posicionesDeLaPista.add(ultimaPosicionDeLaPista);
 		
-		PistaSimple pista = new PistaSimple(unPlano,posicionesDeLaPista);
+		PistaSimple pista = new PistaSimple(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeHelicoptero(helicoptero);
+		pista.recibirAterrizajeDeObjetoVolador(helicoptero);
 	
 		//assert
 		assertTrue(!helicoptero.aterrizo());
@@ -308,9 +291,9 @@ public void testLlegadaDeUnAvionSimpleALaPistaSimpleEnUnaDireccionQueNoEsLaDeEnt
 		posicionesDeLaPista.add(otraPosicionDeLaPista2);
 		posicionesDeLaPista.add(ultimaPosicionDeLaPista);
 		
-		PistaSimple pista = new PistaSimple(unPlano,posicionesDeLaPista);
+		PistaSimple pista = new PistaSimple(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeHelicoptero (helicoptero);
+		pista.recibirAterrizajeDeObjetoVolador (helicoptero);
 	
 		//assert
 		assertTrue(!helicoptero.aterrizo());
@@ -337,9 +320,9 @@ public void testLlegadaDeUnAvionSimpleALaPistaSimpleEnUnaDireccionQueNoEsLaDeEnt
 		posicionesDeLaPista.add(otraPosicionDeLaPista2);
 		posicionesDeLaPista.add(ultimaPosicionDeLaPista);
 	
-		PistaSimple pista = new PistaSimple(unPlano,posicionesDeLaPista);
+		PistaSimple pista = new PistaSimple(posicionesDeLaPista);
 	
-		pista.recibirAterrizajeDeAvionPesado (avionPesado);
+		pista.recibirAterrizajeDeObjetoVolador (avionPesado);
 	
 		//assert
 		assertTrue(!avionPesado.aterrizo());
@@ -366,9 +349,9 @@ public void testLlegadaDeUnAvionSimpleALaPistaSimpleEnUnaDireccionQueNoEsLaDeEnt
 		posicionesDeLaPista.add(otraPosicionDeLaPista2);
 		posicionesDeLaPista.add(ultimaPosicionDeLaPista);
 		
-		PistaSimple pista = new PistaSimple(unPlano,posicionesDeLaPista);
+		PistaSimple pista = new PistaSimple(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionPesado (avionPesado);
+		pista.recibirAterrizajeDeObjetoVolador (avionPesado);
 			
 		//assert
 		assertTrue(!avionPesado.aterrizo());
@@ -394,13 +377,13 @@ public void testLlegadaDeUnAvionSimpleALaPistaSimpleEnUnaDireccionQueNoEsLaDeEnt
 		posicionesDeLaPista.add(otraPosicionDeLaPista2);
 		posicionesDeLaPista.add(ultimaPosicionDeLaPista);
 		
-		PistaSimple pista = new PistaSimple(unPlano,posicionesDeLaPista);
+		PistaSimple pista = new PistaSimple(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionPesado(avionPesado);
+		pista.recibirAterrizajeDeObjetoVolador (avionPesado);
 			
 		//assert
 		assertTrue(!avionPesado.aterrizo());
 	}
-			
-
+	
+	
 }

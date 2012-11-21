@@ -7,19 +7,19 @@ import junit.framework.TestCase;
 public class AvionSimpleTest extends TestCase {
 	
 	private AvionSimple unAvion;
-	private int nivel,limite;
+	private int velocidad,limite;
 	private List<Vector> listaDePuntos;
 	private Trayectoria unaTrayectoria;
-	private Escenario plano;
+	private Nivel unNivel;
 	private Vector destino;
 	
 	protected void setUp () throws Exception {
 		super.setUp();
 		
-		nivel = 1;
+		velocidad = 10;
 		limite = 768;
-		plano = new Escenario (limite);
-		unAvion = new AvionSimple (nivel,plano);
+		unNivel = new Nivel (velocidad,limite);
+		unAvion = new AvionSimple (velocidad,unNivel);
 		listaDePuntos = new ArrayList<Vector>();
 		
 	}
@@ -61,7 +61,56 @@ public class AvionSimpleTest extends TestCase {
 		//assert
 		assertTrue (estaEnUnBorde);
 	}
-
+	
+	public void testVivirDeUnAvionSimpleQueRecienFueGeneradoDeberiaMoverseDeAcuerdoASuDireccionDeSalida(){
+		
+		Vector posicionInicial = unAvion.getPosicion();
+		Vector direccionInicial = new Vector(1,1);
+		
+		unAvion.vivir();
+		
+		assertTrue(unAvion.getPosicion().restar(posicionInicial).esIgual(direccionInicial));
+	}
+	
+	public void testVivirDeUnAvionSimpleConVelocidad2DeberiaTardar5TunosParaMoverseUnaPosicion(){
+		
+		int otraVelocidad = 2;
+		AvionSimple simple = new AvionSimple(otraVelocidad,unNivel);
+		Vector posicionDeSalida = simple.getPosicion();
+		Vector direccionDeSalida = new Vector(1,1);
+		
+		
+		simple.vivir();
+		simple.vivir();
+		simple.vivir();
+		simple.vivir();
+		simple.vivir();
+		
+		assertTrue(simple.getPosicion().restar(posicionDeSalida).esIgual(direccionDeSalida));
+	}
+	
+public void testVivirDeUnAvionSimpleConVelocidad1DeberiaTardar10TunosParaMoverseUnaPosicion(){
+		
+		int otraVelocidad = 1;
+		AvionSimple simple = new AvionSimple(otraVelocidad,unNivel);
+		Vector posicionDeSalida = simple.getPosicion();
+		Vector direccionDeSalida = new Vector(1,1);
+		
+		
+		simple.vivir();
+		simple.vivir();
+		simple.vivir();
+		simple.vivir();
+		simple.vivir();
+		simple.vivir();
+		simple.vivir();
+		simple.vivir();
+		simple.vivir();
+		simple.vivir();
+		
+		assertTrue(simple.getPosicion().restar(posicionDeSalida).esIgual(direccionDeSalida));
+	}
+	
 	public void testMoverDeberiamoverALaPosicionIndicada (){
 		
 		//arrange

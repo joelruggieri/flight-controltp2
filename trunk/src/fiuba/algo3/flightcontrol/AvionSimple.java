@@ -1,18 +1,19 @@
 package fiuba.algo3.flightcontrol;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class AvionSimple extends ObjetoVolador {	
 		
-	public AvionSimple(int nivel, Escenario unPlano) {
+	public AvionSimple(int velocidad, Nivel unNivel) {
 		
-		super(nivel, unPlano);
+		super(velocidad, unNivel);
 		List<Vector> listaDePosiciones = new ArrayList<Vector>();
 		this.setTrayectoria(new Trayectoria(listaDePosiciones));
 		
 	}
 	
-	public void mover() {
+	public void vivir() {
 		/* Mueve el avion simple siguiendo la trayectoria o en el 
 		 * sentido de la direccion si no hay trayectoria definida */
 		/* post: cambia el valor de la posicion actual, buscando el
@@ -32,5 +33,16 @@ public class AvionSimple extends ObjetoVolador {
 		
 		super.vivir();
 	}
+	
+    public void aterrizarSiHayPistaDeAterrizajeCompatible() {
+    	
+    	Iterator<Pista> it = this.getNivel().getPistas();
+    	
+    	while (it.hasNext() && !this.aterrizo()) {
+    		
+    		it.next().recibirAterrizajeDeObjetoVolador(this);
+    	}
+    	
+    }
 		
 }

@@ -8,17 +8,10 @@ public abstract class Pista {
 	private List<Vector> direccionesDeIngreso;
 
 	
-	public Pista(Escenario unPlano, List<Vector> unasEntradas) {
+	public Pista(List<Vector> unasEntradas) {
 		/* Constructor de una pista */
 		
 		this.posiciones = unasEntradas;
-		
-		int i = 0;
-		while (posiciones.size() > i) {
-			
-			unPlano.ocuparPosicion(posiciones.get(i), "pista");
-			i++;
-		}
 		
 		/* Se toman los dos extremos de la pista para conocer la 
 		 * direccion en que deben entrar los
@@ -37,15 +30,25 @@ public abstract class Pista {
 		this.direccionesDeIngreso = new ArrayList<Vector>();
 		this.direccionesDeIngreso.add(direccionDeEntrada);
 	}
+	
+	public List<Vector> getPosiciones() {
+		
+		return posiciones;
+	}
+	
+	public List<Vector> getDireccionesDeIngreso() {
+		
+		return direccionesDeIngreso;
+	}
+	
+	public void setDireccionesDeIngreso(List<Vector> direcciones) {
+		
+		direccionesDeIngreso = direcciones;
+	}
 		
 	public Vector getPosicionDeEntrada() {
 		
 		return this.posiciones.get(0);
-	}
-	
-	protected List<Vector> getListaDePosicionesDeEntrada() {
-		
-		return this.posiciones;
 	}
 	
 	public Vector getDireccionDeEntrada() {
@@ -53,17 +56,7 @@ public abstract class Pista {
 		return this.direccionesDeIngreso.get(0);
 	}
 	
-	protected List<Vector> getListaDeDireccionesDeEntrada() {
-		
-		return this.direccionesDeIngreso;
-	}
-	
-	protected void agregarDireccionesDeIngreso(List<Vector> direcciones) {
-		
-		this.direccionesDeIngreso = direcciones;
-	}
-	
-	public void recibirAterrizajeDeAvionSimple(AvionSimple simple) {
+	public void recibirAterrizajeDeObjetoVolador(AvionSimple simple) {
 		
 		boolean posicionesIguales, direccionesIguales;
 		Vector miEntrada, miPosicion;
@@ -79,10 +72,10 @@ public abstract class Pista {
 		}
 	}
 	
-	 public void recibirAterrizajeDeHelicoptero(Helicoptero helicoptero) {
+	 public void recibirAterrizajeDeObjetoVolador(Helicoptero helicoptero) {
 	 }
 	
-	 public void recibirAterrizajeDeComputarizado(AvionComputarizado ac) {
+	 public void recibirAterrizajeDeObjetoVolador(AvionComputarizado ac) {
 		 
 		boolean posicionesIguales, direccionesIguales;
 		Vector miEntrada, miPosicion;
@@ -98,6 +91,8 @@ public abstract class Pista {
 		}
 	 }
 	
-	 public void recibirAterrizajeDeAvionPesado(AvionPesado pesado) {
+	 public void recibirAterrizajeDeObjetoVolador(AvionPesado pesado) {
 	}
+	 
+	
 }
