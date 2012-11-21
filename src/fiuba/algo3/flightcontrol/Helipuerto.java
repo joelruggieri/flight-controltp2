@@ -3,9 +3,9 @@ import java.util.List;
 
 public class Helipuerto extends Pista {
 	
-	public Helipuerto(Escenario unPlano, List<Vector> unasEntradas) {
+	public Helipuerto(List<Vector> unasEntradas) {
 		
-		super(unPlano, unasEntradas);
+		super(unasEntradas);
 	}
 	
 	public Vector getDireccionDeEntrada() {
@@ -13,11 +13,11 @@ public class Helipuerto extends Pista {
 		throw new NoTieneUnaDireccionDeEntradaException();
 	}
 	
-	public void recibirAterrizajeDeAvionSimple(AvionSimple simple) {
+	public void recibirAterrizajeDeObjetoVolador(AvionSimple simple) {
 		
 	}
 	
-	public void recibirAterrizajeDeHelicoptero(Helicoptero helicoptero) {
+	public void recibirAterrizajeDeObjetoVolador(Helicoptero helicoptero) {
 		
 		if (helicoptero.getPosicion().esIgual(getPosicionDeEntrada())) {
 			
@@ -26,7 +26,8 @@ public class Helipuerto extends Pista {
 		
 	}
 	
-	public void recibirAterrizajeDeComputarizado(AvionComputarizado avion) {
+	public void recibirAterrizajeDeObjetoVolador(AvionComputarizado avion) {
 	}
-
+	
+	
 }

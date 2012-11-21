@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class PistaDobleEntrada extends Pista {
 	
 		
-	public PistaDobleEntrada(Escenario unPlano, List<Vector> unasEntradas) {
+	public PistaDobleEntrada(List<Vector> unasEntradas) {
 				
-		super(unPlano, unasEntradas);
+		super(unasEntradas);
 		
 		/* obtengo la otra direccion en la que pueden entrar los
 		 * aviones por el otro extremo de la pista*/
@@ -25,6 +25,23 @@ public class PistaDobleEntrada extends Pista {
 		this.agregarDireccionesDeIngreso(direccionesDeIngreso);
 	}
 	
+	
+	private Vector getPosicionDeSegundaEntrada() {
+		
+		int indiceUltimaPosicion = this.getPosiciones().size() - 1;	
+		return this.getPosiciones().get(indiceUltimaPosicion);
+	}
+	
+	protected void agregarDireccionesDeIngreso(List<Vector> direcciones) {
+		
+		this.setDireccionesDeIngreso(direcciones);
+	}
+
+	private Vector getDireccionDeSegundaEntrada() {
+	
+		return this.getDireccionesDeIngreso().get(1);
+	}
+	
 	private boolean validarPrimeraEntradaYDireccion(ObjetoVolador avion) {
 		
 		boolean ingresoPorDireccion, ingresoPorPosicion;
@@ -32,10 +49,10 @@ public class PistaDobleEntrada extends Pista {
 		Vector posDeIngreso, miPosicion;
 		
 		miPosicion = avion.getPosicion();
-		posDeIngreso = this.getListaDePosicionesDeEntrada().get(0);
+		posDeIngreso = this.getPosicionDeEntrada();
 		
 		miDireccion = avion.getDireccion();
-		direcDeIngreso = this.getListaDeDireccionesDeEntrada().get(0);
+		direcDeIngreso = this.getDireccionDeEntrada();
 		
 		ingresoPorPosicion = miPosicion.esIgual(posDeIngreso);
 		ingresoPorDireccion = miDireccion.esIgual(direcDeIngreso);
@@ -48,13 +65,13 @@ public class PistaDobleEntrada extends Pista {
 		boolean ingresoPorDireccion, ingresoPorPosicion;
 		Vector direcDeIngreso, miDireccion;
 		Vector posDeIngreso, miPosicion;
-		int pos = this.getListaDePosicionesDeEntrada().size() - 1;
+		
 		
 		miPosicion = avion.getPosicion();
-		posDeIngreso = this.getListaDePosicionesDeEntrada().get(pos);
+		posDeIngreso = this.getPosicionDeSegundaEntrada();
 		
 		miDireccion = avion.getDireccion();
-		direcDeIngreso = this.getListaDeDireccionesDeEntrada().get(1);
+		direcDeIngreso = this.getDireccionDeSegundaEntrada();
 		
 		ingresoPorPosicion = miPosicion.esIgual(posDeIngreso);
 		ingresoPorDireccion = miDireccion.esIgual(direcDeIngreso);
@@ -73,7 +90,7 @@ public class PistaDobleEntrada extends Pista {
 	}
 	
 	
-	public void recibirAterrizajeDeAvionSimple(AvionSimple simple) {
+	public void recibirAterrizajeDeObjetoVolador(AvionSimple simple) {
 		
 		if (this.validarEntradaYDireccion(simple)) {
 			simple.aterrizar();
@@ -81,7 +98,7 @@ public class PistaDobleEntrada extends Pista {
 		
 	}
 		
-	public void recibirAterrizajeDeComputarizado(AvionComputarizado avion) {
+	public void recibirAterrizajeDeObjetoVolador(AvionComputarizado avion) {
 		
 		if (this.validarEntradaYDireccion(avion)) {
 			avion.aterrizar();

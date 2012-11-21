@@ -9,8 +9,8 @@ public class HelipuertoTest extends TestCase {
 	private List <Vector> posicionesDestino,posicionesDeLaPista;
 	private Trayectoria unaTrayectoria;
 	private Vector posicion1,posicion2,posicion3,posicion4;
-	private int nivel,dimension;
-	private Escenario unPlano;
+	private int velocidad,dimension;
+	private Nivel unNivel;
 	private AvionSimple avion;
 	private Helicoptero helicoptero;
 	private AvionPesado avionPesado;
@@ -26,13 +26,13 @@ public class HelipuertoTest extends TestCase {
 		posicionesDestino = new ArrayList <Vector>();
 		posicionesDeLaPista = new ArrayList <Vector>();
 		
-		nivel = 1;
+		velocidad = 10;
 		dimension = 768;
-		unPlano = new Escenario(dimension);
+		unNivel = new Nivel(velocidad, dimension);
 				
-		avion = new AvionSimple(nivel,unPlano);
-		helicoptero = new Helicoptero(nivel,unPlano);
-		avionPesado = new AvionPesado(nivel,unPlano);
+		avion = new AvionSimple(velocidad,unNivel);
+		helicoptero = new Helicoptero(velocidad,unNivel);
+		avionPesado = new AvionPesado(velocidad,unNivel);
 		
 	}
 	
@@ -51,25 +51,6 @@ public class HelipuertoTest extends TestCase {
 		
 	}
 	
-	public void testConstructorDeUnHelipuertoLaposicionDeLaPistaDeberianEstarOcupadasPorEsta() throws PosicionFueraDeLasDimensionesEstablecidasException{
-		
-		//arrange
-		
-		/*creo las Vectores de la pista*/
-		Vector posicionDeEntrada = new Vector(4,1);
-		
-	
-		//act
-		posicionesDeLaPista.add(posicionDeEntrada);
-		
-		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
-	
-		//assert
-		assertEquals(unPlano.getPosicion(posicionDeEntrada),"pista");
-		
-	}
-	
 	public void testConstructorDeUnHelipuertoPedirLaDireccionDeberiaLanzarUnaExceocion(){
 		
 		//arrange
@@ -80,7 +61,7 @@ public class HelipuertoTest extends TestCase {
 		//act
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 	
 		//assert	
 		try{
@@ -100,7 +81,7 @@ public class HelipuertoTest extends TestCase {
 		//act
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
 		//assert	
 		assertTrue(pista.getPosicionDeEntrada() == posicionDeEntrada);
@@ -121,9 +102,9 @@ public class HelipuertoTest extends TestCase {
 		Vector posicionDeEntrada = new Vector(1,1);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionSimple(avion);
+		pista.recibirAterrizajeDeObjetoVolador(avion);
 	
 		//assert
 		assertTrue(!avion.aterrizo());
@@ -143,9 +124,9 @@ public class HelipuertoTest extends TestCase {
 		Vector posicionDeEntrada = new Vector(2,1);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionSimple(avion);
+		pista.recibirAterrizajeDeObjetoVolador(avion);
 	
 		//assert
 		assertTrue(!avion.aterrizo());
@@ -164,9 +145,9 @@ public class HelipuertoTest extends TestCase {
 		Vector posicionDeEntrada = new Vector(1,2);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionSimple(avion);
+		pista.recibirAterrizajeDeObjetoVolador(avion);
 	
 		//assert
 		assertTrue(!avion.aterrizo());
@@ -185,9 +166,9 @@ public void testLlegadaDeUnAvionSimpleALHelipuertoEnDireccionOesteNoDeberiaAterr
 		Vector posicionDeEntrada = new Vector(2,1);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionSimple(avion);
+		pista.recibirAterrizajeDeObjetoVolador(avion);
 	
 		//assert
 		assertTrue(!avion.aterrizo());
@@ -207,9 +188,9 @@ public void testLlegadaDeUnAvionSimpleALHelipuertoEnDireccionOesteNoDeberiaAterr
 	Vector posicionDeEntrada = new Vector(1,2);
 	posicionesDeLaPista.add(posicionDeEntrada);
 	
-	Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+	Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 	
-	pista.recibirAterrizajeDeAvionSimple(avion);
+	pista.recibirAterrizajeDeObjetoVolador(avion);
 
 	//assert
 	assertTrue(!avion.aterrizo());
@@ -229,9 +210,9 @@ public void testLlegadaDeUnAvionSimpleALHelipuertoEnDireccionNoroesteNoDeberiaAt
 		Vector posicionDeEntrada = new Vector(1,1);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionSimple(avion);
+		pista.recibirAterrizajeDeObjetoVolador(avion);
 	
 		//assert
 		assertTrue(!avion.aterrizo());
@@ -250,9 +231,9 @@ public void testLlegadaDeUnAvionSimpleALHelipuertoEnDireccionNoroesteNoDeberiaAt
 	Vector posicionDeEntrada = new Vector(2,1);
 	posicionesDeLaPista.add(posicionDeEntrada);
 	
-	Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+	Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 	
-	pista.recibirAterrizajeDeAvionSimple(avion);
+	pista.recibirAterrizajeDeObjetoVolador(avion);
 
 	//assert
 	assertTrue(!avion.aterrizo());
@@ -271,9 +252,9 @@ public void testLlegadaDeUnAvionSimpleALHelipuertoEnDireccionNoroesteNoDeberiaAt
 		Vector posicionDeEntrada = new Vector(2,1);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionSimple(avion);
+		pista.recibirAterrizajeDeObjetoVolador(avion);
 	
 		//assert
 		assertTrue(!avion.aterrizo());
@@ -292,9 +273,9 @@ public void testLlegadaDeUnAvionPesadoALHelipuertoEnDireccionNorteNoDeberiaAterr
 		Vector posicionDeEntrada = new Vector(1,1);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionPesado(avionPesado);
+		pista.recibirAterrizajeDeObjetoVolador(avionPesado);
 	
 		//assert
 		assertTrue(!avionPesado.aterrizo());
@@ -314,9 +295,9 @@ public void testLlegadaDeUnAvionPesadoALHelipuertoEnDireccionNorteNoDeberiaAterr
 		Vector posicionDeEntrada = new Vector(2,1);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionPesado(avionPesado);
+		pista.recibirAterrizajeDeObjetoVolador(avionPesado);
 	
 		//assert
 		assertTrue(!avionPesado.aterrizo());
@@ -335,9 +316,9 @@ public void testLlegadaDeUnAvionPesadoALHelipuertoEnDireccionNorteNoDeberiaAterr
 		Vector posicionDeEntrada = new Vector(1,2);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionPesado(avionPesado);
+		pista.recibirAterrizajeDeObjetoVolador(avionPesado);
 	
 		//assert
 		assertTrue(!avionPesado.aterrizo());
@@ -356,9 +337,9 @@ public void testLlegadaDeUnAvionPesadoALHelipuertoEnDireccionOesteNoDeberiaAterr
 		Vector posicionDeEntrada = new Vector(2,1);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionPesado(avionPesado);
+		pista.recibirAterrizajeDeObjetoVolador(avionPesado);
 	
 		//assert
 		assertTrue(!avionPesado.aterrizo());
@@ -378,9 +359,9 @@ public void testLlegadaDeUnAvionPesadoALHelipuertoEnDireccionOesteNoDeberiaAterr
 	Vector posicionDeEntrada = new Vector(1,2);
 	posicionesDeLaPista.add(posicionDeEntrada);
 	
-	Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+	Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 	
-	pista.recibirAterrizajeDeAvionPesado(avionPesado);
+	pista.recibirAterrizajeDeObjetoVolador(avionPesado);
 
 	//assert
 	assertTrue(!avionPesado.aterrizo());
@@ -400,9 +381,9 @@ public void testLlegadaDeUnAvionPesadoALHelipuertoEnDireccionNoroesteNoDeberiaAt
 		Vector posicionDeEntrada = new Vector(1,1);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionPesado(avionPesado);
+		pista.recibirAterrizajeDeObjetoVolador(avionPesado);
 	
 		//assert
 		assertTrue(!avionPesado.aterrizo());
@@ -421,9 +402,9 @@ public void testLlegadaDeUnAvionPesadoALHelipuertoEnDireccionNoroesteNoDeberiaAt
 	Vector posicionDeEntrada = new Vector(2,1);
 	posicionesDeLaPista.add(posicionDeEntrada);
 	
-	Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+	Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 	
-	pista.recibirAterrizajeDeAvionPesado(avionPesado);
+	pista.recibirAterrizajeDeObjetoVolador(avionPesado);
 
 	//assert
 	assertTrue(!avionPesado.aterrizo());
@@ -442,9 +423,9 @@ public void testLlegadaDeUnAvionPesadoALHelipuertoEnDireccionNoroesteNoDeberiaAt
 		Vector posicionDeEntrada = new Vector(2,1);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeAvionPesado(avionPesado);
+		pista.recibirAterrizajeDeObjetoVolador(avionPesado);
 	
 		//assert
 		assertTrue(!avionPesado.aterrizo());
@@ -463,9 +444,9 @@ public void testLlegadaDeUnHelicopteroALHelipuertoEnDireccionNorteDeberiaAterriz
 		Vector posicionDeEntrada = new Vector(1,1);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeHelicoptero(helicoptero);
+		pista.recibirAterrizajeDeObjetoVolador(helicoptero);
 	
 		//assert
 		assertTrue(helicoptero.aterrizo());
@@ -485,9 +466,9 @@ public void testLlegadaDeUnHelicopteroALHelipuertoEnDireccionNorteDeberiaAterriz
 		Vector posicionDeEntrada = new Vector(2,1);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeHelicoptero(helicoptero);
+		pista.recibirAterrizajeDeObjetoVolador(helicoptero);
 	
 		//assert
 		assertTrue(helicoptero.aterrizo());
@@ -506,9 +487,9 @@ public void testLlegadaDeUnHelicopteroALHelipuertoEnDireccionNorteDeberiaAterriz
 		Vector posicionDeEntrada = new Vector(1,2);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeHelicoptero(helicoptero);
+		pista.recibirAterrizajeDeObjetoVolador(helicoptero);
 	
 		//assert
 		assertTrue(helicoptero.aterrizo());
@@ -527,9 +508,9 @@ public void testLlegadaDeUnHelicopteroALHelipuertoEnDireccionOesteNoDeberiaAterr
 		Vector posicionDeEntrada = new Vector(2,1);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeHelicoptero(helicoptero);
+		pista.recibirAterrizajeDeObjetoVolador(helicoptero);
 	
 		//assert
 		assertTrue(helicoptero.aterrizo());
@@ -549,9 +530,9 @@ public void testLlegadaDeUnHelicopteroALHelipuertoEnDireccionOesteNoDeberiaAterr
 	Vector posicionDeEntrada = new Vector(1,2);
 	posicionesDeLaPista.add(posicionDeEntrada);
 	
-	Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+	Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 	
-	pista.recibirAterrizajeDeHelicoptero(helicoptero);
+	pista.recibirAterrizajeDeObjetoVolador(helicoptero);
 
 	//assert
 	assertTrue(helicoptero.aterrizo());
@@ -571,9 +552,9 @@ public void testLlegadaDeUnHelicopteroALHelipuertoEnDireccionNoroesteNoDeberiaAt
 		Vector posicionDeEntrada = new Vector(1,1);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeHelicoptero(helicoptero);
+		pista.recibirAterrizajeDeObjetoVolador(helicoptero);
 	
 		//assert
 		assertTrue(helicoptero.aterrizo());
@@ -592,9 +573,9 @@ public void testLlegadaDeUnHelicopteroALHelipuertoEnDireccionNoroesteNoDeberiaAt
 	Vector posicionDeEntrada = new Vector(2,1);
 	posicionesDeLaPista.add(posicionDeEntrada);
 	
-	Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+	Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 	
-	pista.recibirAterrizajeDeHelicoptero(helicoptero);
+	pista.recibirAterrizajeDeObjetoVolador(helicoptero);
 
 	//assert
 	assertTrue(helicoptero.aterrizo());
@@ -613,9 +594,9 @@ public void testLlegadaDeUnHelicopteroALHelipuertoEnDireccionNoroesteNoDeberiaAt
 		Vector posicionDeEntrada = new Vector(2,1);
 		posicionesDeLaPista.add(posicionDeEntrada);
 		
-		Helipuerto pista = new Helipuerto(unPlano,posicionesDeLaPista);
+		Helipuerto pista = new Helipuerto(posicionesDeLaPista);
 		
-		pista.recibirAterrizajeDeHelicoptero(helicoptero);
+		pista.recibirAterrizajeDeObjetoVolador(helicoptero);
 	
 		//assert
 		assertTrue(helicoptero.aterrizo());

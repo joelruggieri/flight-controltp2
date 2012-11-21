@@ -1,14 +1,19 @@
 package fiuba.algo3.flightcontrol;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+
 
 public class AvionComputarizado extends ObjetoVolador {
 	
-	public AvionComputarizado(int nivel, Escenario plano, Pista pista) {
+	public AvionComputarizado(int velocidad, Nivel unNivel) {
 		
-		super(nivel, plano);
+		super(velocidad, unNivel);
 		List<Vector> listaDePuntos;
-		listaDePuntos = calcularTrayectoriaHaciaUnaPista(pista);
+		
+		Pista unaPista = unNivel.getUnaPistaValida();
+		listaDePuntos = calcularTrayectoriaHaciaUnaPista(unaPista);
 		this.setTrayectoria(new Trayectoria(listaDePuntos));
 	}
 
@@ -30,4 +35,15 @@ public class AvionComputarizado extends ObjetoVolador {
 		return trayectoriaDefinida;
 	}
 
+	
+    public void aterrizarSiHayPistaDeAterrizajeCompatible() {
+    	
+    	Iterator<Pista> it = this.getNivel().getPistas();
+    	
+    	while (it.hasNext() && !this.aterrizo()) {
+    		
+    		it.next().recibirAterrizajeDeObjetoVolador(this);
+    	}
+    	
+    }
 }
