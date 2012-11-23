@@ -69,6 +69,32 @@ public class Vector {
 		return (new Vector(x, y));
 		
 	}
+	
+	public Vector alCuadrado() {
+		
+		int x, y;
+		
+		x = this.x * this.x;
+		y = this.y * this.y;
+		
+		return (new Vector(x, y));
+	}
+	
+	public double distancia(Vector otraPosicion) {
+		
+		double distancia;
+		Vector unVector;
+		int valorDentroDeLaRaiz;
+		
+		unVector = this.restar(otraPosicion);
+		unVector = unVector.alCuadrado();
+		
+		valorDentroDeLaRaiz = unVector.getPosicionX() + unVector.getPosicionY();
+		distancia = Math.sqrt(valorDentroDeLaRaiz);
+		
+		return distancia;
+	}
+	
 
 
 	public Vector invertirDireccion() {
