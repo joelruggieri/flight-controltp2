@@ -2,6 +2,12 @@ package fiuba.algo3.flightcontrol;
 import java.util.ArrayList;
 import java.util.List;
 
+import fiuba.algo3.flightcontrol.modelo.AvionSimple;
+import fiuba.algo3.flightcontrol.modelo.Nivel;
+import fiuba.algo3.flightcontrol.modelo.ObjetoVolador;
+import fiuba.algo3.flightcontrol.modelo.Trayectoria;
+import fiuba.algo3.flightcontrol.modelo.Vector;
+
 import junit.framework.TestCase;
 
 public class AvionSimpleTest extends TestCase {

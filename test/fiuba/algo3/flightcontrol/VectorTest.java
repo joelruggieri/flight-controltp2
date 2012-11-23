@@ -1,4 +1,5 @@
 package fiuba.algo3.flightcontrol;
+import fiuba.algo3.flightcontrol.modelo.Vector;
 import junit.framework.TestCase;
 
 
