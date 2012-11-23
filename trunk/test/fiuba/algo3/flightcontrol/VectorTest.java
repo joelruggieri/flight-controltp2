@@ -15,7 +15,7 @@ public class VectorTest extends TestCase {
 		otraPosicion = new Vector (4,7);
 	}
 	
-	public void testConstructorDeunaPosicionDeberiaSetearSusCoordenadas(){		
+	public void testConstructorDeunaPosicionDeberiaSetearSusCoordenadas() {		
 		
 		//arrange
 		int coordenadaX = 1;
@@ -27,7 +27,7 @@ public class VectorTest extends TestCase {
 		assertTrue ( coordenadaX == unaPosicion.getPosicionX() && coordenadaY == unaPosicion.getPosicionY());
 	}
    
-	public void testDeDosVectoresIgualesEqualsDeberiaDarVerdadero () {		
+	public void testDeDosVectoresIgualesEqualsDeberiaDarVerdadero() {		
 		
 		//arrange
 		boolean sonIguales;
@@ -42,7 +42,7 @@ public class VectorTest extends TestCase {
 		
 	}
    
-	public void testDeDosVectoresDistintasEqualsDeberiaDarFalso () {		
+	public void testDeDosVectoresDistintasEqualsDeberiaDarFalso() {		
 		
 		//arrange
 		boolean sonIguales;
@@ -55,7 +55,7 @@ public class VectorTest extends TestCase {
 		
 	}
   
-	public void testSumarDosVectoresDeberiaDarLaSuma (){
+	public void testSumarDosVectoresDeberiaDarLaSuma() {
 		
 		//arange
 		Vector adicion = new Vector (5,9);
@@ -69,7 +69,7 @@ public class VectorTest extends TestCase {
 		
 	}
 	
-	public void testRestarDosVectoresDeberiaDarLaResta (){
+	public void testRestarDosVectoresDeberiaDarLaResta() {
 		
 		//arange
 		Vector sustraccion = new Vector (-3,-5);
@@ -83,7 +83,7 @@ public class VectorTest extends TestCase {
 
 	}
 	
-	public void testMultiplicarUnNumeroPorUnVectorDeberiaRealizarElProductoEscalar (){
+	public void testMultiplicarUnNumeroPorUnVectorDeberiaRealizarElProductoEscalar() {
 		
 		//arrange
 		int escalar = 3;
@@ -95,6 +95,61 @@ public class VectorTest extends TestCase {
 	
 		//assert
 		assertTrue (producto.esIgual(productoFinal));
+	}
+	
+	public void testUnVectorAlCualdradoDeberiaDarmeSuXeYAlCuadrado() {
+		
+		//arrange
+		Vector resultadoEsperado = new Vector(1,4);
+		Vector alCuadrado;
+		
+		//act
+		alCuadrado = unaPosicion.alCuadrado();
+		
+		//assert
+		assertTrue (alCuadrado.esIgual(resultadoEsperado));
+	}
+	
+	public void testLaDistanciaEntreUnVectorYOtroDeberiaSerSuNorma() {
+		
+		//arrange
+		double resultadoEsperado = 1;
+		Vector vector1 = new Vector(1, 1);
+		Vector vector2 = new Vector(1, 2);
+		
+		//act
+		double resultado = vector1.distancia(vector2);
+		
+		//assert
+		assertTrue (resultado == resultadoEsperado);
+	}
+	
+	public void testLaDistanciaEntreUnVectorYOtroDeberiaSerSuNorma2() {
+		
+		//arrange
+		double resultadoEsperado = 2;
+		Vector vector1 = new Vector(1, 0);
+		Vector vector2 = new Vector(1, 2);
+		
+		//act
+		double resultado = vector1.distancia(vector2);
+		
+		//assert
+		assertTrue (resultado == resultadoEsperado);
+	}
+	
+	public void testLaDistanciaEntreUnVectorYOtroDeberiaSerSuNorma3() {
+		
+		//arrange
+		double resultadoEsperado = Math.sqrt(8);
+		Vector vector1 = new Vector(0, 0);
+		Vector vector2 = new Vector(2, 2);
+		
+		//act
+		double resultado = vector1.distancia(vector2);
+		
+		//assert
+		assertTrue (resultado == resultadoEsperado);
 	}
 	
 }
