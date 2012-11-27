@@ -21,8 +21,7 @@ public class PistaLarga extends Pista {
 		
 		if (posicionesIguales && direccionesIguales) {
 			pesado.aterrizar();
-			this.setChanged();
-			this.notifyObservers(pesado);
+
 		}
 		
 	}

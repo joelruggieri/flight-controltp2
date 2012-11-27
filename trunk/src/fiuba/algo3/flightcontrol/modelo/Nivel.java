@@ -21,8 +21,6 @@ public class Nivel extends Observable implements ObjetoVivo {
 	private int velocidadDelNivel;
 	private int limite;
 	
-	
-	
 	public Nivel(int numeroDeNivel, int limite) {
 		
 		final int maximo = 10;
@@ -35,6 +33,7 @@ public class Nivel extends Observable implements ObjetoVivo {
 		this.cantidadDeAviones = this.velocidadDelNivel * maximo;
 		this.limite = limite;
 		this.generarPistas();
+		
 	}
 	
 	public int getLimite() {
@@ -89,7 +88,7 @@ public class Nivel extends Observable implements ObjetoVivo {
 		contadorDeTurnos ++;
 	}
 	
-	private ObjetoVolador getUltimoObjetoVolador() {
+	public ObjetoVolador getUltimoObjetoVolador() {
 		
 		return this.avionesEnJuego.get(avionesEnJuego.size()-1);
 	}

@@ -5,7 +5,7 @@ import java.util.Observable;
 import fiuba.algo3.titiritero.modelo.ObjetoPosicionable;
 import java.util.List;
 
-public abstract class Pista extends Observable implements ObjetoPosicionable{
+public abstract class Pista implements ObjetoPosicionable{
 
 	private List<Vector> posiciones;
 	private List<Vector> direccionesDeIngreso;
@@ -82,8 +82,7 @@ public abstract class Pista extends Observable implements ObjetoPosicionable{
 		
 		if (posicionesIguales && direccionesIguales) {
 			simple.aterrizar();
-			this.setChanged();
-			this.notifyObservers(simple);
+
 		}
 	}
 	
@@ -103,8 +102,6 @@ public abstract class Pista extends Observable implements ObjetoPosicionable{
 		
 		if (posicionesIguales && direccionesIguales) {
 			avionComputarizado.aterrizar();
-			this.setChanged();
-			this.notifyObservers(avionComputarizado);
 		}
 	 }
 	

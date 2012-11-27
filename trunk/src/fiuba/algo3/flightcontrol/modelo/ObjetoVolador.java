@@ -1,10 +1,11 @@
 package fiuba.algo3.flightcontrol.modelo;
 import java.util.Iterator;
+import java.util.Observable;
 import java.util.Random;
 import fiuba.algo3.titiritero.modelo.ObjetoPosicionable;
 import fiuba.algo3.titiritero.modelo.ObjetoVivo;
 
-public abstract class ObjetoVolador implements ObjetoVivo, ObjetoPosicionable {
+public abstract class ObjetoVolador extends Observable implements ObjetoVivo, ObjetoPosicionable {
 	
 	private Vector posicionActual, direccion;
 	private boolean aterrizado; 
@@ -46,6 +47,8 @@ public abstract class ObjetoVolador implements ObjetoVivo, ObjetoPosicionable {
 	public void vivir() {
 		this.mover();
 		this.aterrizarSiHayPistaDeAterrizajeCompatible();
+		this.setChanged();
+		this.notifyObservers(this.aterrizado);
 	}
 	
 	abstract void aterrizarSiHayPistaDeAterrizajeCompatible();
