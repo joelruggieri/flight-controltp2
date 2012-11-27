@@ -8,10 +8,10 @@ public class Helipuerto extends Pista {
 		super(unasEntradas);
 	}
 	
-	public Vector getDireccionDeEntrada() {
+	//public Vector getDireccionDeEntrada() {
 		
-		throw new NoTieneUnaDireccionDeEntradaException();
-	}
+	//	throw new NoTieneUnaDireccionDeEntradaException();
+//	}
 	
 	public void recibirAterrizajeDeObjetoVolador(AvionSimple simple) {
 		
@@ -22,6 +22,8 @@ public class Helipuerto extends Pista {
 		if (helicoptero.getPosicion().esIgual(getPosicionDeEntrada())) {
 			
 			helicoptero.aterrizar();
+			this.setChanged();
+			this.notifyObservers(helicoptero);
 		}
 		
 	}
