@@ -44,6 +44,17 @@ public class Nivel extends Observable implements ObjetoVivo {
 	public void vivir() {
 		
 		this.generarObjetoVolador();
+		this.actualizarListaDeAvionesEnJuego();
+	}
+	
+	private void actualizarListaDeAvionesEnJuego() {
+		
+		Iterator<ObjetoVolador> it = this.getObjetosVoladores();
+		while (it.hasNext()) {
+			if (it.next().aterrizo()) {
+				it.remove();
+			}
+		}
 	}
 	
 	private void generarObjetoVolador() {
