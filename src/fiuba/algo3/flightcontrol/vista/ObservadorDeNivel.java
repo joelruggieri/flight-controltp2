@@ -28,7 +28,7 @@ public class ObservadorDeNivel implements Observer {
 		//this.gameLoop.agregar(circulo);
 		
 		ObjetoVolador objetoVolador = nivel.getUltimoObjetoVolador();
-		ObservadorDeObjetoVolador unObservador = new ObservadorDeObjetoVolador(circulo, unaSuperficie, objetoVolador);
+		ObservadorDeObjetoVolador unObservador = new ObservadorDeObjetoVolador(gameLoop, circulo, unaSuperficie, objetoVolador);
 	    objetoVolador.addObserver(unObservador);
 
 	}

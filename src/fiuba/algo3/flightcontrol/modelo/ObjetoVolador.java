@@ -197,16 +197,18 @@ public abstract class ObjetoVolador extends Observable implements ObjetoVivo, Ob
 	public boolean chocar() {
 		
 		boolean choco = false;
-		double distanciaDeChoque = 2; //O sea, radio de cada ObjetoVolador es de 1
+		double distanciaDeChoque = 20; //O sea, radio de cada ObjetoVolador es de 20
 		Iterator<ObjetoVolador> it;
 		Vector otraPosicion;
 		
 		it = this.getNivel().getObjetosVoladores();
 		
 		while (it.hasNext() && !choco) {
-			
-			otraPosicion = it.next().getPosicion();
-			choco = (otraPosicion.distancia(this.getPosicion()) <= distanciaDeChoque);
+			ObjetoVolador unObjetoVolador = it.next();
+			if (unObjetoVolador.getPosicion() != this.getPosicion()) {
+				otraPosicion = unObjetoVolador.getPosicion();
+				choco = (otraPosicion.distancia(this.getPosicion()) <= distanciaDeChoque);
+			}
 		}
 		
 		return choco;
