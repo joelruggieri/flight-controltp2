@@ -94,8 +94,6 @@ public class PistaDobleEntrada extends Pista {
 		
 		if (this.validarEntradaYDireccion(simple)) {
 			simple.aterrizar();
-			this.setChanged();
-			this.notifyObservers(simple);
 		}
 		
 	}
@@ -104,8 +102,7 @@ public class PistaDobleEntrada extends Pista {
 		
 		if (this.validarEntradaYDireccion(avionComputarizado)) {
 			avionComputarizado.aterrizar();
-			this.setChanged();
-			this.notifyObservers(avionComputarizado);
+
 		}
 		
 	}
