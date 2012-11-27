@@ -1,8 +1,11 @@
 package fiuba.algo3.flightcontrol.modelo;
 import java.util.ArrayList;
+import java.util.Observable;
+
+import fiuba.algo3.titiritero.modelo.ObjetoPosicionable;
 import java.util.List;
 
-public abstract class Pista {
+public abstract class Pista extends Observable implements ObjetoPosicionable{
 
 	private List<Vector> posiciones;
 	private List<Vector> direccionesDeIngreso;
@@ -29,6 +32,16 @@ public abstract class Pista {
 		
 		this.direccionesDeIngreso = new ArrayList<Vector>();
 		this.direccionesDeIngreso.add(direccionDeEntrada);
+	}
+	
+	public int getX() {
+		
+		return this.getPosicionDeEntrada().getPosicionX();
+	}
+	
+	public int getY() {
+		
+		return this.getPosicionDeEntrada().getPosicionY();
 	}
 	
 	public List<Vector> getPosiciones() {
@@ -69,13 +82,15 @@ public abstract class Pista {
 		
 		if (posicionesIguales && direccionesIguales) {
 			simple.aterrizar();
+			this.setChanged();
+			this.notifyObservers(simple);
 		}
 	}
 	
 	 public void recibirAterrizajeDeObjetoVolador(Helicoptero helicoptero) {
 	 }
 	
-	 public void recibirAterrizajeDeObjetoVolador(AvionComputarizado ac) {
+	 public void recibirAterrizajeDeObjetoVolador(AvionComputarizado avionComputarizado) {
 		 
 		boolean posicionesIguales, direccionesIguales;
 		Vector miEntrada, miPosicion;
@@ -83,11 +98,13 @@ public abstract class Pista {
 		miPosicion = this.getPosicionDeEntrada();
 		miEntrada = this.getDireccionDeEntrada();
 		
-		posicionesIguales = ac.getPosicion().esIgual(miPosicion);
-		direccionesIguales = ac.getDireccion().esIgual(miEntrada);
+		posicionesIguales = avionComputarizado.getPosicion().esIgual(miPosicion);
+		direccionesIguales = avionComputarizado.getDireccion().esIgual(miEntrada);
 		
 		if (posicionesIguales && direccionesIguales) {
-			ac.aterrizar();
+			avionComputarizado.aterrizar();
+			this.setChanged();
+			this.notifyObservers(avionComputarizado);
 		}
 	 }
 	

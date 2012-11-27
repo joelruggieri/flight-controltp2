@@ -2,16 +2,21 @@ package fiuba.algo3.flightcontrol.modelo;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Observable;
+import java.util.Observer;
 
 import java.util.List;
 
 import java.util.Random;
 
-public class Nivel {
+import fiuba.algo3.titiritero.modelo.ObjetoVivo;
+
+public class Nivel extends Observable implements ObjetoVivo {
 	
 	private List<ObjetoVolador> avionesEnJuego;
 	private List<Pista> pistas;
 	private int frecuenciaDeSalida;
+	private int contadorDeTurnos;
 	private int cantidadDeAviones;
 	private int velocidadDelNivel;
 	private int limite;
@@ -25,11 +30,11 @@ public class Nivel {
 		this.velocidadDelNivel = numeroDeNivel;
 		this.avionesEnJuego = new ArrayList<ObjetoVolador>();
 		this.pistas = new ArrayList<Pista>();
-		
+		this.frecuenciaDeSalida = 30;
+		this.contadorDeTurnos = 30;
 		this.cantidadDeAviones = this.velocidadDelNivel * maximo;
 		this.limite = limite;
 		this.generarPistas();
-		//faltan inicializar la frecuancia 
 	}
 	
 	public int getLimite() {
@@ -37,42 +42,58 @@ public class Nivel {
 		return this.limite;
 	}
 	
-	public void generarObjetoVolador() {
+	public void vivir() {
 		
-		if (this.avionesEnJuego.size() < this.cantidadDeAviones) {
-			
-			Random generadorDeRandoms = new Random();
-			int vel, codigoDeAvion;
-			final int cantidad = 4;
-			
-			vel = this.velocidadDelNivel;
-			codigoDeAvion = generadorDeRandoms.nextInt(cantidad);
-						
-			switch (codigoDeAvion) {
-			case 0 : 
-				AvionSimple simple = new AvionSimple(vel, this);
-				this.avionesEnJuego.add(simple);
-					 
-			case 1 : 
-				AvionPesado pesado = new AvionPesado(vel, this);
-				this.avionesEnJuego.add(pesado);
-				
-			case 2 : 
-				Helicoptero helicoptero;
-				helicoptero = new Helicoptero(vel, this);
-			 	this.avionesEnJuego.add(helicoptero);		
-			 		 
-			default : 
-				AvionComputarizado avionComp;
-				avionComp = new AvionComputarizado(vel, this);
-			 	this.avionesEnJuego.add(avionComp);
-					 
-			}
-			
-		} else throw new EstanTodosLosOVDelNivelException();
-		
+		this.generarObjetoVolador();
 	}
 	
+	private void generarObjetoVolador() {
+			
+		if (contadorDeTurnos == frecuenciaDeSalida)	{
+			contadorDeTurnos = 0;
+		
+			if (this.avionesEnJuego.size() < this.cantidadDeAviones) {
+				
+				Random generadorDeRandoms = new Random();
+				int vel, codigoDeAvion;
+				final int cantidad = 4;
+				
+				vel = this.velocidadDelNivel;
+				codigoDeAvion = generadorDeRandoms.nextInt(cantidad);
+				
+				System.out.println(codigoDeAvion);
+				
+				
+				if (codigoDeAvion == 0){
+					AvionSimple simple = new AvionSimple(vel, this);
+					this.avionesEnJuego.add(simple);
+				}else if (codigoDeAvion == 1){
+					AvionPesado pesado = new AvionPesado(vel, this);
+					this.avionesEnJuego.add(pesado);
+				}else if (codigoDeAvion == 2){
+					Helicoptero helicoptero;
+					helicoptero = new Helicoptero(vel, this);
+				 	this.avionesEnJuego.add(helicoptero);	
+				}else{
+					AvionComputarizado avionComp;
+					avionComp = new AvionComputarizado(vel, this);
+				 	this.avionesEnJuego.add(avionComp);
+				}
+				
+				
+				this.setChanged();
+			} else throw new EstanTodosLosOVDelNivelException();
+			
+			this.notifyObservers(this.getUltimoObjetoVolador());	
+		}
+		contadorDeTurnos ++;
+	}
+	
+	private ObjetoVolador getUltimoObjetoVolador() {
+		
+		return this.avionesEnJuego.get(avionesEnJuego.size()-1);
+	}
+
 	private List<Vector> generarPosicionesPistaSimple() {
 		
 		final int numeroPredeterminado = 2;
@@ -159,7 +180,6 @@ public class Nivel {
 		listaPosicionesPista.add(otraPosicion1);
 		listaPosicionesPista.add(otraPosicion2);
 		listaPosicionesPista.add(otraPosicion3);
-		
 		
 		return listaPosicionesPista;
 	}
