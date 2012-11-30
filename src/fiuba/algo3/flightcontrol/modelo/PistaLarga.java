@@ -16,7 +16,7 @@ public class PistaLarga extends Pista {
 		miPosicion = this.getPosicionDeEntrada();
 		miEntrada = this.getDireccionDeEntrada();
 		
-		posicionesIguales = pesado.getPosicion().esIgual(miPosicion);
+		posicionesIguales = (pesado.getPosicion().distancia(miPosicion) <= 20);
 		direccionesIguales = pesado.getDireccion().esIgual(miEntrada);
 		
 		if (posicionesIguales && direccionesIguales) {

@@ -77,7 +77,7 @@ public abstract class Pista implements ObjetoPosicionable{
 		miPosicion = this.getPosicionDeEntrada();
 		miEntrada = this.getDireccionDeEntrada();
 		
-		posicionesIguales = simple.getPosicion().esIgual(miPosicion);
+		posicionesIguales = (simple.getPosicion().distancia(miPosicion) <= 20);
 		direccionesIguales = simple.getDireccion().esIgual(miEntrada);
 		
 		if (posicionesIguales && direccionesIguales) {
@@ -97,7 +97,7 @@ public abstract class Pista implements ObjetoPosicionable{
 		miPosicion = this.getPosicionDeEntrada();
 		miEntrada = this.getDireccionDeEntrada();
 		
-		posicionesIguales = avionComputarizado.getPosicion().esIgual(miPosicion);
+		posicionesIguales = (avionComputarizado.getPosicion().distancia(miPosicion) <= 20);
 		direccionesIguales = avionComputarizado.getDireccion().esIgual(miEntrada);
 		
 		if (posicionesIguales && direccionesIguales) {
