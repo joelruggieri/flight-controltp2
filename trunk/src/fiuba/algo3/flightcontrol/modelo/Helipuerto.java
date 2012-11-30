@@ -19,7 +19,7 @@ public class Helipuerto extends Pista {
 	
 	public void recibirAterrizajeDeObjetoVolador(Helicoptero helicoptero) {
 		
-		if (helicoptero.getPosicion().esIgual(getPosicionDeEntrada())) {
+		if (helicoptero.getPosicion().distancia(getPosicionDeEntrada()) <= 20) {
 			
 			helicoptero.aterrizar();
 
