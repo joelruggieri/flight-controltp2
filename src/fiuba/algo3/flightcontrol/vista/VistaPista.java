@@ -13,23 +13,26 @@ import fiuba.algo3.flightcontrol.modelo.PistaLarga;
 import fiuba.algo3.titiritero.dibujables.Cuadrado;
 import fiuba.algo3.titiritero.modelo.ObjetoPosicionable;
 
-public class VistaPista extends Cuadrado {
-	
+public class VistaPista extends Rectangulo {
+	private Rectangulo dibujo;
+		
 	public VistaPista(Pista modelo) {
-		super(20, 20, modelo);
+		super(modelo.getPosicionFinal().getPosicionX(),modelo.getPosicionFinal().getPosicionY() , modelo);
 		this.setColor (this.pintar(modelo));
 	}
 	
 	private Color pintar (Pista modelo){
 		
-		Color color = Color.GREEN;;
+		Color color;
 		
 		if (modelo.getClass() == Helipuerto.class){
-			color = Color.YELLOW;
+			color = new Color (150,150,150);
 		}else if (modelo.getClass() == PistaLarga.class){
-			color = Color.CYAN;
+			color = new Color (100,100,100);
 		}else if (modelo.getClass() == PistaDobleEntrada.class){
-			color = Color.BLUE;
+			color = new Color (50,50,50);
+		}else{
+			color = new Color (0,0,0);
 		}
 		
 	return color;
