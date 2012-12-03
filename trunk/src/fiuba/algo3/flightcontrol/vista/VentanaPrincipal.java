@@ -107,7 +107,7 @@ public class VentanaPrincipal {
 		panel.addMouseListener(new MouseAdapter() {
 				
 			private ObjetoVolador unAvion;
-			private List<Vector> unaLista = new ArrayList<Vector>();
+			private List<Vector> unaLista;
 			
 			@Override
 			public void mouseClicked(MouseEvent click) {	
@@ -120,7 +120,10 @@ public class VentanaPrincipal {
 					if (this.unAvion == null) {
 					
 						this.unAvion = this.obtenerAvion(click);
-						System.out.println("AAAAAAAAAAAAAAAAAAAAAAAA");
+						if (this.unAvion != null) {
+							unaLista = new ArrayList<Vector>();
+							System.out.println("AAAAAAAAAAAAAAAAAAAAAAAA");
+						}
 					
 					} else {
 						
@@ -136,7 +139,6 @@ public class VentanaPrincipal {
 						Trayectoria unaTrayectoria = new Trayectoria(unaLista);
 						this.unAvion.setTrayectoria(unaTrayectoria);
 						this.unAvion = null;
-						this.unaLista.clear();
 						System.out.println("CCCCCCCCCCCCCCCCCCCCCCC");
 					}
 						
