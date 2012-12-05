@@ -12,24 +12,30 @@ import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
 
 public class ObservadorDeNivel implements Observer {
 
-	private GameLoop gameLoop;
-	private SuperficieDeDibujo unaSuperficie;
+	//private GameLoop gameLoop;
+	//private SuperficieDeDibujo unaSuperficie;
 	private Nivel nivel;
+	private ObjetoVolador objetoVolador;
 	
 	public ObservadorDeNivel(GameLoop unGameLoop, SuperficieDeDibujo unaSuperficie, Nivel unNivel) {
-		this.gameLoop = unGameLoop;
-		this.unaSuperficie = unaSuperficie;
+		//this.gameLoop = unGameLoop;
+		//this.unaSuperficie = unaSuperficie;
 		this.nivel = unNivel;
 	}
 	
 	public void update(Observable o, Object arg) {
-		ObjetoVolador objetoVolador = nivel.getUltimoObjetoVolador();
-		this.gameLoop.agregar(objetoVolador);
+		this.objetoVolador = nivel.getUltimoObjetoVolador();
+		/*this.gameLoop.agregar(objetoVolador);
 		Circulo circulo = new VistaObjetoVolador((ObjetoVolador)objetoVolador);
 		
 		ObservadorDeObjetoVolador unObservador = new ObservadorDeObjetoVolador(gameLoop, circulo, unaSuperficie, objetoVolador);
-	    objetoVolador.addObserver(unObservador);
+	    objetoVolador.addObserver(unObservador);*/
 
+	}
+	
+	public ObjetoVolador getNave(){
+		
+		return this.objetoVolador;
 	}
 
 }

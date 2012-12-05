@@ -32,12 +32,13 @@ import fiuba.algo3.flightcontrol.modelo.ObjetoVolador;
 import fiuba.algo3.flightcontrol.modelo.Pista;
 import fiuba.algo3.flightcontrol.modelo.Trayectoria;
 import fiuba.algo3.flightcontrol.modelo.Vector;
+import fiuba.algo3.flightcontrol.vista.ObservadorGameLoop;
 
 import fiuba.algo3.titiritero.dibujables.Cuadrado;
 import fiuba.algo3.titiritero.dibujables.SuperficiePanel;
 import fiuba.algo3.titiritero.modelo.GameLoop;
 import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
-
+import fiuba.algo3.titiritero.modelo.ObservadorDeGameLoop;
 public class VentanaPrincipal {
 
 	private JFrame frame;
@@ -189,8 +190,8 @@ public class VentanaPrincipal {
 		
 		ObservadorDeNivel observadorDeNivel = new ObservadorDeNivel(gameLoop, (SuperficieDeDibujo)unPanel, unNivel);
 		unNivel.addObserver(observadorDeNivel);
-		ObservadorDeGameLoop observadorGameLoop = new ObservadorDeGameLoop(observadorDeNivel);
-		//this.gameLoop.agregarObservador(observadorGameLoop);
+		ObservadorDeGameLoop observadorGameLoop = new ObservadorGameLoop(observadorDeNivel, gameLoop, (SuperficieDeDibujo)unPanel );
+		this.gameLoop.agregarObservador(observadorGameLoop);
 		this.gameLoop.agregar(unNivel);
 	
 		Iterator<Pista> it = unNivel.getPistas();
