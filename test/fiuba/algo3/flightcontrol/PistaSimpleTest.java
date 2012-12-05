@@ -215,6 +215,7 @@ public void testLlegadaDeUnAvionSimpleALaPistaSimpleEnUnaDireccionQueNoEsLaDeEnt
 		// removemos las pistas del nivel para evitar que el avion pueda aterrizar antes de llegar a la pista creada
 		this.removerLasPistasDelNivel();
 		//act
+		this.moverAvion(avion,posicion1);
 		this.moverAvion(avion, posicion2);
 		
 		/*creo las Vectores de la pista*/
