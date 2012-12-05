@@ -116,16 +116,18 @@ public class VentanaPrincipal {
 			private ObjetoVolador unAvion;
 			private List<Vector> unaLista;
 			private JPanel panel;
+			JFrame frame;
 			
 			@Override
 			public void mouseClicked(MouseEvent click) {	
 				
 				JTextArea textArea = new JTextArea();
 				textArea.setLineWrap(true);
-				JFrame frame = new JFrame("ATENCION");
-				frame.setBounds(50, 200, 200, 70);	
-				frame.getContentPane().add(textArea);
-				
+				if (frame == null) {
+					frame = new JFrame("ATENCION");
+					frame.setBounds(50, 200, 200, 70);	
+				}
+
 				if (click.isAltDown()) {
 					if (this.unAvion == null) {
 					
@@ -134,8 +136,9 @@ public class VentanaPrincipal {
 							unaLista = new ArrayList<Vector>();
 							
 							textArea.setText("Agarro un Objeto Volador");
+							frame.getContentPane().add(textArea);
 							frame.setVisible(true);
-							
+
 						}
 					
 					} else {
@@ -144,6 +147,7 @@ public class VentanaPrincipal {
 						unaLista.add(posicionClick);
 						
 						textArea.setText("Seteo una Posicion");
+						frame.getContentPane().add(textArea);
 						frame.setVisible(true);
 					}
 					
@@ -155,6 +159,7 @@ public class VentanaPrincipal {
 						this.unAvion = null;
 						
 						textArea.setText("Seteo una nueva Trayectoria");
+						frame.getContentPane().add(textArea);
 						frame.setVisible(true);
 					}
 						
