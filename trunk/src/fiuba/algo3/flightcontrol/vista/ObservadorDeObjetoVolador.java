@@ -26,9 +26,9 @@ public class ObservadorDeObjetoVolador implements Observer {
 	public void update(Observable arg0, Object aterrizo) {
 		if (!this.unObjetoVolador.aterrizo()) {
 			unaVista.dibujar(unaSuperficie);	
-		} else { 
+		} /*else { 
 			this.unGameLoop.remover(unObjetoVolador); 
-		}
+		}*/
 		
 		if (this.unObjetoVolador.chocar()) {
 			this.unGameLoop.detenerEjecucion();
