@@ -1,7 +1,9 @@
 package fiuba.algo3.flightcontrol.vista;
 
+import java.util.Iterator;
 import java.util.Observable;
 
+import fiuba.algo3.flightcontrol.modelo.Nivel;
 import fiuba.algo3.flightcontrol.modelo.ObjetoVolador;
 import fiuba.algo3.titiritero.dibujables.Circulo;
 import fiuba.algo3.titiritero.modelo.GameLoop;
@@ -14,7 +16,7 @@ public class ObservadorGameLoop implements ObservadorDeGameLoop{
 	private ObservadorDeNivel observadorNivel;
 	private GameLoop gameLoop;
 	
-	public ObservadorGameLoop(ObservadorDeNivel observadorNivel , GameLoop gameLoop, SuperficieDeDibujo unaSuperficie){
+	public ObservadorGameLoop(ObservadorDeNivel observadorNivel ,GameLoop gameLoop, SuperficieDeDibujo unaSuperficie){
 		
 		this.gameLoop = gameLoop;
 		this.observadorNivel = observadorNivel;
@@ -22,17 +24,6 @@ public class ObservadorGameLoop implements ObservadorDeGameLoop{
 	}
 		
 	
-	
-	/*public void update(Observable arg0, Object aterrizo){
-		
-		ObjetoVolador avion = this.observadorNivel.getNave();
-		this.gameLoop.agregar(avion);
-		Circulo circulo = new VistaObjetoVolador((ObjetoVolador)avion);
-		
-		ObservadorDeObjetoVolador unObservador = new ObservadorDeObjetoVolador(gameLoop, circulo, unaSuperficie, avion);
-	    avion.addObserver(unObservador);
-
-	}*/
 	
 	public void notificarCicloFinalizado(){
 		ObjetoVolador avion = this.observadorNivel.getNave();
@@ -42,6 +33,22 @@ public class ObservadorGameLoop implements ObservadorDeGameLoop{
 		ObservadorDeObjetoVolador unObservador = new ObservadorDeObjetoVolador(gameLoop, circulo, unaSuperficie, avion);
 	    avion.addObserver(unObservador);
 		
+	    this.removerAvionesAterrizados();
+	    
 	}
-
+	
+	private void removerAvionesAterrizados(){
+		
+		Nivel unNivel = this.observadorNivel.getNivel();
+		Iterator iteradorDeObjetosVoladores = unNivel.getObjetosVoladores();
+		while(iteradorDeObjetosVoladores.hasNext()){
+			ObjetoVolador unAvion = (ObjetoVolador) iteradorDeObjetosVoladores.next();
+			if (unAvion.aterrizo()) {
+				this.gameLoop.remover(unAvion); 
+			}
+				
+			}
+		}
+		
 }
+

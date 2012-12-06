@@ -126,7 +126,7 @@ public class Nivel extends Observable implements ObjetoVivo {
 		int corrido = 0;
 		List<Vector> listaPosicionesPista = new ArrayList<Vector>();
 		Vector posicionPista;
-		for(int i = 0; i < 50 ; i++){
+		for(int i = 0; i < 75 ; i++){
 			posicionPista = new Vector(posicion, posicion + corrido);
 			corrido++;
 			listaPosicionesPista.add(posicionPista);
@@ -162,7 +162,7 @@ public class Nivel extends Observable implements ObjetoVivo {
 		List<Vector> listaPosicionesPista = new ArrayList<Vector>();
 		Vector posicionPista;
 		
-		for(int i = 0; i < 50 ; i++){
+		for(int i = 0; i < 100 ; i++){
 			posicionPista = new Vector(pos + corrido, pos);
 			corrido++;
 			listaPosicionesPista.add(posicionPista);
@@ -180,7 +180,7 @@ public class Nivel extends Observable implements ObjetoVivo {
 		List<Vector> listaPosicionesPista = new ArrayList<Vector>();
 		Vector posicionPista;
 		
-		for(int i = 0; i < 100 ; i++){
+		for(int i = 0; i < 200 ; i++){
 			posicionPista = new Vector(pos + corrido, pos);
 			corrido++;
 			listaPosicionesPista.add(posicionPista);

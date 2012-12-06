@@ -37,5 +37,10 @@ public class ObservadorDeNivel implements Observer {
 		
 		return this.objetoVolador;
 	}
+	
+	public Nivel getNivel(){
+		
+		return nivel;
+	}
 
 }
