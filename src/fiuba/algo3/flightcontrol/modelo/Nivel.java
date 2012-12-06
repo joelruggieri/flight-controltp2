@@ -57,7 +57,7 @@ public class Nivel extends Observable implements ObjetoVivo {
 				this.velocidadDelNivel =+ 10;
 				this.frecuenciaDeSalida =-10;
 				this.contadorDeTurnos = this.frecuenciaDeSalida;
-				}
+			}
 		}
 		
 	}
