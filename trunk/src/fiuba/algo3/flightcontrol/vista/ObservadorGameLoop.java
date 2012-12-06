@@ -45,10 +45,9 @@ public class ObservadorGameLoop implements ObservadorDeGameLoop{
 			ObjetoVolador unAvion = (ObjetoVolador) iteradorDeObjetosVoladores.next();
 			if (unAvion.aterrizo()) {
 				this.gameLoop.remover(unAvion); 
-			}
-				
-			}
+			}		
 		}
+	}
 		
 }
 

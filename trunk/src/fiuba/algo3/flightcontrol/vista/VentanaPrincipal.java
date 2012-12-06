@@ -101,7 +101,6 @@ public class VentanaPrincipal {
 		this.gameLoop = new GameLoop((SuperficieDeDibujo) panel);
 		
 		final Nivel unNivel = new Nivel(10,tamano.height-60);
-		final List<Vector> unaLista = new ArrayList<Vector>(); 
 		
 		this.inicializarModelo((SuperficieDeDibujo) panel, unNivel);
 				
@@ -115,7 +114,6 @@ public class VentanaPrincipal {
 				
 			private ObjetoVolador unAvion;
 			private List<Vector> unaLista;
-			private JPanel panel;
 			JFrame frame;
 			
 			@Override
@@ -212,7 +210,7 @@ public class VentanaPrincipal {
 		frame.setFocusable(true);
 		btnDetener.setFocusable(false);
 		btnIniciar.setFocusable(false);
-		
+	
 	}
 
 	private void addKeyListener() {
