@@ -5,9 +5,7 @@ import java.util.Observer;
 
 import fiuba.algo3.flightcontrol.modelo.Nivel;
 import fiuba.algo3.flightcontrol.modelo.ObjetoVolador;
-import fiuba.algo3.titiritero.dibujables.Circulo;
 import fiuba.algo3.titiritero.modelo.GameLoop;
-import fiuba.algo3.titiritero.modelo.ObjetoVivo;
 import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
 
 public class ObservadorDeNivel implements Observer {
@@ -15,7 +13,8 @@ public class ObservadorDeNivel implements Observer {
 	private Nivel nivel;
 	private ObjetoVolador objetoVolador;
 	
-	public ObservadorDeNivel(GameLoop unGameLoop, SuperficieDeDibujo unaSuperficie, Nivel unNivel) {
+	public ObservadorDeNivel(GameLoop unGameLoop, 
+			SuperficieDeDibujo unaSuperficie, Nivel unNivel) {
 
 		this.nivel = unNivel;
 	}
@@ -25,12 +24,12 @@ public class ObservadorDeNivel implements Observer {
 
 	}
 	
-	public ObjetoVolador getNave(){
+	public ObjetoVolador getNave() {
 		
 		return this.objetoVolador;
 	}
 	
-	public Nivel getNivel(){
+	public Nivel getNivel() {
 		
 		return nivel;
 	}
